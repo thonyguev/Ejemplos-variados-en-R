@@ -1,0 +1,48 @@
+---
+title: "Ejemplos variados en R"
+---
+
+## Ejemplo 3
+
+## Ejemplo 2 - Gráfica
+
+**Gráfica con Ggplot2**
+
+```{r, message=FALSE}
+library(ggplot2)
+```
+
+```{r}
+data(iris)
+```
+
+-   Se pasa el dataset de iris.
+
+-   se establece los elementos a evaluar, en este caso la longitud y anchura de los sépalos.
+
+-   En el eje de la `x` irá la longitud, el eje de las `y` la anchura del sépalo, se establece la representacion por medio de puntos y por último se coloca la leyenda en la parte inferior de la gráfica.
+
+```{r}
+ggplot(
+  iris,
+  aes(x = Sepal.Length, y = Sepal.Width, color = Species)) + 
+  geom_point() +
+  labs(x = "Longitud del Sépalo", y = "Ancho del Sépalo") +
+  theme(legend.position = "bottom")
+```
+
+## Ejemplo 1 - Histograma
+
+**Histograma del dataset iris**
+
+Cargar el dataset iris
+
+```{r}
+data(iris)
+```
+
+Crear histograma de los valores de la longitud del sépalo
+
+```{r}
+hist(iris$Sepal.Length)
+```

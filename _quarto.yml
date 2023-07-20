@@ -1,0 +1,22 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Ejemplos variados en R"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Inicio
+      - href: https://github.com/thonyguev/Ejemplos-varios-en-R/tree/main
+        icon: github
+        text: repositorio
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+editor: visual
+

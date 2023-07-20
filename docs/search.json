@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "index.html#ejemplo-2---gráfica",
+    "href": "index.html#ejemplo-2---gráfica",
+    "title": "Ejemplos variados en R",
+    "section": "Ejemplo 2 - Gráfica",
+    "text": "Ejemplo 2 - Gráfica\nGráfica con Ggplot2\n\nlibrary(ggplot2)\n\n\ndata(iris)\n\n\nSe pasa el dataset de iris.\nse establece los elementos a evaluar, en este caso la longitud y anchura de los sépalos.\nEn el eje de la x irá la longitud, el eje de las y la anchura del sépalo, se establece la representacion por medio de puntos y por último se coloca la leyenda en la parte inferior de la gráfica.\n\n\nggplot(\n  iris,\n  aes(x = Sepal.Length, y = Sepal.Width, color = Species)) + \n  geom_point() +\n  labs(x = \"Longitud del Sépalo\", y = \"Ancho del Sépalo\") +\n  theme(legend.position = \"bottom\")"
+  },
+  {
+    "objectID": "index.html#ejemplo-1---histograma",
+    "href": "index.html#ejemplo-1---histograma",
+    "title": "Ejemplos variados en R",
+    "section": "Ejemplo 1 - Histograma",
+    "text": "Ejemplo 1 - Histograma\nHistograma del dataset iris\nCargar el dataset iris\n\ndata(iris)\n\nCrear histograma de los valores de la longitud del sépalo\n\nhist(iris$Sepal.Length)"
+  }
+]
