@@ -1,15 +1,43 @@
 [
   {
-    "objectID": "index.html#ejemplo-2---gráfica",
-    "href": "index.html#ejemplo-2---gráfica",
-    "title": "Ejemplos variados en R",
-    "section": "Ejemplo 2 - Gráfica",
-    "text": "Ejemplo 2 - Gráfica\nGráfica con Ggplot2\n\nlibrary(ggplot2)\n\n\ndata(iris)\n\n\nSe pasa el dataset de iris.\nse establece los elementos a evaluar, en este caso la longitud y anchura de los sépalos.\nEn el eje de la x irá la longitud, el eje de las y la anchura del sépalo, se establece la representacion por medio de puntos y por último se coloca la leyenda en la parte inferior de la gráfica.\n\n\nggplot(\n  iris,\n  aes(x = Sepal.Length, y = Sepal.Width, color = Species)) + \n  geom_point() +\n  labs(x = \"Longitud del Sépalo\", y = \"Ancho del Sépalo\") +\n  theme(legend.position = \"bottom\")"
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Ejemplos",
+    "section": "",
+    "text": "Crear un Rmarkdown que le genere un HTML con lo siguiente\nLeer el archivo en formato CSV t mostrarlo con la librería de R- DT\nEl listado se debe mostrar las columnas necesarias (en el hyperlink no debe mostrar sino la columna que dice Etiqueta)\nColoquele un logo (jpg o png)\nAdjunto documento de guía\nFecha de entrega: lunes 24 de julio - 2023\n\n\n\nRespuesta\n\nSe cargan las librerias necesarias.\n\nlibrary(stringr)\nlibrary(DT)\n\nSe lee el archivo csv.\n\nfile &lt;- read.csv(file = \"./lista-empresas.csv\")\n\nLas funciones link y tag toman un índice como argumento y devuelven el valor correspondiente en la columna Link y Etiqueta del objeto file. El doble corchete [[index]] se utiliza para acceder a un elemento específico dentro de una lista o un data frame.\n\nlink &lt;- function(index) file$Link[[index]]\ntag &lt;- function(index) file$Etiqueta[[index]]\n\nEsta línea de código asigna a la variable iterations el número de elementos en la columna Link del objeto file.\n\niterations &lt;- file$Link %&gt;% length() %&gt;% 1:.\n\nLa función lapply() aplica una función por cada iteración, en cada iteración a traves de la función str_glue() pasamos el link y la etiqueta, en un código HTML que permite crear enlaces &lt;a href=\"url\"&gt;name&lt;/a&gt;\n\nlink_convertion &lt;- lapply(iterations, function(index){\n  return(str_glue(\"&lt;a href='{link(index)}'&gt;{tag(index)}&lt;/a&gt;\"))\n})\n\nTransformamos el link_convertion en filas con rbind y posteriormente en un dataframe.\n\nnew_links &lt;- link_convertion %&gt;% do.call(rbind,.) %&gt;% data.frame(Enlace = .)\n\nCreamos un dataframe nuevo a partir del csv original, con los datos que necesitamos.\n\nfile_filter &lt;- subset(file, select = c(\"Industria\",\"Derpartmento\"))\n\nCombinamos los 2 nuevos dataframe en columnas con cbind\n\nnew_file &lt;- cbind(file_filter,new_links)\n\n\nEl nuevo dataframe resultante de la combinación, lo mostramos en un datatable, con los siguientes parametros:\n\nfilter = \"top\": mustra un barra de busqueda en la parte superior de cada columna.\nclass: permite agregar clases css como:\n\ncell-border: crear bordes por cada celda.\nhover: permite resaltar las filas cuando se pasa el cursor sobre ellas.\n\n\n\nnew_file %&gt;% datatable(escape = FALSE , filter = \"top\", class = 'cell-border hover')"
+  },
+  {
+    "objectID": "index.html#asignación-1",
+    "href": "index.html#asignación-1",
+    "title": "Ejemplos",
+    "section": "",
+    "text": "Crear un Rmarkdown que le genere un HTML con lo siguiente\nLeer el archivo en formato CSV t mostrarlo con la librería de R- DT\nEl listado se debe mostrar las columnas necesarias (en el hyperlink no debe mostrar sino la columna que dice Etiqueta)\nColoquele un logo (jpg o png)\nAdjunto documento de guía\nFecha de entrega: lunes 24 de julio - 2023\n\n\n\nRespuesta\n\nSe cargan las librerias necesarias.\n\nlibrary(stringr)\nlibrary(DT)\n\nSe lee el archivo csv.\n\nfile &lt;- read.csv(file = \"./lista-empresas.csv\")\n\nLas funciones link y tag toman un índice como argumento y devuelven el valor correspondiente en la columna Link y Etiqueta del objeto file. El doble corchete [[index]] se utiliza para acceder a un elemento específico dentro de una lista o un data frame.\n\nlink &lt;- function(index) file$Link[[index]]\ntag &lt;- function(index) file$Etiqueta[[index]]\n\nEsta línea de código asigna a la variable iterations el número de elementos en la columna Link del objeto file.\n\niterations &lt;- file$Link %&gt;% length() %&gt;% 1:.\n\nLa función lapply() aplica una función por cada iteración, en cada iteración a traves de la función str_glue() pasamos el link y la etiqueta, en un código HTML que permite crear enlaces &lt;a href=\"url\"&gt;name&lt;/a&gt;\n\nlink_convertion &lt;- lapply(iterations, function(index){\n  return(str_glue(\"&lt;a href='{link(index)}'&gt;{tag(index)}&lt;/a&gt;\"))\n})\n\nTransformamos el link_convertion en filas con rbind y posteriormente en un dataframe.\n\nnew_links &lt;- link_convertion %&gt;% do.call(rbind,.) %&gt;% data.frame(Enlace = .)\n\nCreamos un dataframe nuevo a partir del csv original, con los datos que necesitamos.\n\nfile_filter &lt;- subset(file, select = c(\"Industria\",\"Derpartmento\"))\n\nCombinamos los 2 nuevos dataframe en columnas con cbind\n\nnew_file &lt;- cbind(file_filter,new_links)\n\n\nEl nuevo dataframe resultante de la combinación, lo mostramos en un datatable, con los siguientes parametros:\n\nfilter = \"top\": mustra un barra de busqueda en la parte superior de cada columna.\nclass: permite agregar clases css como:\n\ncell-border: crear bordes por cada celda.\nhover: permite resaltar las filas cuando se pasa el cursor sobre ellas.\n\n\n\nnew_file %&gt;% datatable(escape = FALSE , filter = \"top\", class = 'cell-border hover')"
+  },
+  {
+    "objectID": "index.html#ejemplo-4",
+    "href": "index.html#ejemplo-4",
+    "title": "Ejemplos",
+    "section": "Ejemplo 4",
+    "text": "Ejemplo 4\n\nlibrary(dplyr)\n\nCreando un data frame de ejemplo\n\ndatos &lt;- data.frame(\n  nombre = c(\"Juan\", \"María\", \"Pedro\", \"Ana\"),\n  edad = c(25, 30, 20, 35),\n  ciudad = c(\"Madrid\", \"Barcelona\", \"Valencia\", \"Sevilla\")\n)\n\nSeleccionar solo las filas con edad mayor a 25 años\n\ndatos_filtrados &lt;- datos %&gt;%\n  filter(edad &gt; 25)\n\nOrdenar los datos por edad de forma descendente\n\ndatos_ordenados &lt;- datos_filtrados %&gt;%\n  arrange(desc(edad))\n\nSeleccionar solo las columnas de nombre y ciudad\n\ndatos_finales &lt;- datos_ordenados %&gt;%\n  select(nombre, ciudad)\n\nMostrar los datos finales\n\ndatos_finales\n\n  nombre    ciudad\n1    Ana   Sevilla\n2  María Barcelona"
+  },
+  {
+    "objectID": "index.html#ejemplo-3---interpolación-de-string-con-glue",
+    "href": "index.html#ejemplo-3---interpolación-de-string-con-glue",
+    "title": "Ejemplos",
+    "section": "Ejemplo 3 - Interpolación de string con glue",
+    "text": "Ejemplo 3 - Interpolación de string con glue\nLa libreria de stringr, permite interpolar string a traves de la función str_glue()\nEn este caso tenemos las siguientes constantes que colocaremos dentro del string.\n\nnum_1 &lt;- 2\nnum_2 &lt;- 3\nsum &lt;- num_1 + num_2\n\nLlamamos la libreria.\n\nlibrary(stringr)\n\nUtilizamos la función str_glue(), pasando el texto que queremos, para incluir las constantes previamente definidas las envolvemos dentro de unos corchetes.\n\nstr_glue(\"La suma de {num_1} + {num_2} es {sum}\")\n\nLa suma de 2 + 3 es 5"
+  },
+  {
+    "objectID": "index.html#ejemplo-2---gráfica-con-ggplot2",
+    "href": "index.html#ejemplo-2---gráfica-con-ggplot2",
+    "title": "Ejemplos",
+    "section": "Ejemplo 2 - Gráfica con ggplot2",
+    "text": "Ejemplo 2 - Gráfica con ggplot2\nGráfica con Ggplot2\n\nlibrary(ggplot2)\n\n\ndata(iris)\n\n\nSe pasa el dataset de iris.\nse establece los elementos a evaluar, en este caso la longitud y anchura de los sépalos.\nEn el eje de la x irá la longitud, el eje de las y la anchura del sépalo, se establece la representacion por medio de puntos y por último se coloca la leyenda en la parte inferior de la gráfica.\n\n\nggplot(\n  iris,\n  aes(x = Sepal.Length, y = Sepal.Width, color = Species)) + \n  geom_point() +\n  labs(x = \"Longitud del Sépalo\", y = \"Ancho del Sépalo\") +\n  theme(legend.position = \"bottom\")"
   },
   {
     "objectID": "index.html#ejemplo-1---histograma",
     "href": "index.html#ejemplo-1---histograma",
-    "title": "Ejemplos variados en R",
+    "title": "Ejemplos",
     "section": "Ejemplo 1 - Histograma",
     "text": "Ejemplo 1 - Histograma\nHistograma del dataset iris\nCargar el dataset iris\n\ndata(iris)\n\nCrear histograma de los valores de la longitud del sépalo\n\nhist(iris$Sepal.Length)"
   }

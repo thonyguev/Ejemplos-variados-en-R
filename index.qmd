@@ -1,10 +1,163 @@
 ---
-title: "Ejemplos variados en R"
+title: "Ejemplos"
 ---
 
-## Ejemplo 3
+## Asignación #1
 
-## Ejemplo 2 - Gráfica
+1.  Crear un Rmarkdown que le genere un HTML con lo siguiente
+
+2.  Leer el archivo en formato CSV t mostrarlo con la librería de R- DT
+
+3.  El listado se debe mostrar las columnas necesarias (en el hyperlink no debe mostrar sino la columna que dice Etiqueta)
+
+4.  Coloquele un logo (jpg o png)
+
+5.  Adjunto documento de guía
+
+6.  Fecha de entrega: lunes 24 de julio - 2023
+
+<details>
+
+<summary><b>Respuesta</b></summary>
+
+Se cargan las librerias necesarias.
+
+```{r}
+library(stringr)
+library(DT)
+```
+
+Se lee el archivo csv.
+
+```{r}
+file <- read.csv(file = "./lista-empresas.csv")
+```
+
+Las funciones **`link`** y **`tag`** toman un índice como argumento y devuelven el valor correspondiente en la columna **`Link`** y **`Etiqueta`** del objeto **`file`**. El doble corchete **`[[index]]`** se utiliza para acceder a un elemento específico dentro de una lista o un data frame.
+
+```{r}
+link <- function(index) file$Link[[index]]
+tag <- function(index) file$Etiqueta[[index]]
+```
+
+Esta línea de código asigna a la variable **`iterations`** el número de elementos en la columna **`Link`** del objeto **`file`**.
+
+```{r}
+iterations <- file$Link %>% length() %>% 1:.
+```
+
+La función **`lapply()`** aplica una función por cada iteración, en cada iteración a traves de la función **`str_glue()`** pasamos el link y la etiqueta, en un código HTML que permite crear enlaces **`<a href="url">name</a>`**
+
+```{r}
+link_convertion <- lapply(iterations, function(index){
+  return(str_glue("<a href='{link(index)}'>{tag(index)}</a>"))
+})
+```
+
+Transformamos el **`link_convertion`** en filas con **`rbind`** y posteriormente en un dataframe.
+
+```{r}
+new_links <- link_convertion %>% do.call(rbind,.) %>% data.frame(Enlace = .)
+```
+
+Creamos un dataframe nuevo a partir del csv original, con los datos que necesitamos.
+
+```{r}
+file_filter <- subset(file, select = c("Industria","Derpartmento"))
+```
+
+Combinamos los 2 nuevos dataframe en columnas con **`cbind`**
+
+```{r}
+new_file <- cbind(file_filter,new_links)
+```
+
+![](https://www.r-project.org/Rlogo.png){width="100" height="100"}
+
+El nuevo dataframe resultante de la combinación, lo mostramos en un datatable, con los siguientes parametros:
+
+-   **`filter = "top"`**: mustra un barra de busqueda en la parte superior de cada columna.
+
+-   **`class`**: permite agregar clases css como:
+
+    -   **cell-border:** crear bordes por cada celda.
+
+    -   **hover:** permite resaltar las filas cuando se pasa el cursor sobre ellas.
+
+```{r}
+new_file %>% datatable(escape = FALSE , filter = "top", class = 'cell-border hover')
+```
+
+</details>
+
+## Ejemplo 4
+
+```{r, message=FALSE}
+library(dplyr)
+```
+
+Creando un data frame de ejemplo
+
+```{r}
+datos <- data.frame(
+  nombre = c("Juan", "María", "Pedro", "Ana"),
+  edad = c(25, 30, 20, 35),
+  ciudad = c("Madrid", "Barcelona", "Valencia", "Sevilla")
+)
+```
+
+Seleccionar solo las filas con edad mayor a 25 años
+
+```{r}
+datos_filtrados <- datos %>%
+  filter(edad > 25)
+```
+
+Ordenar los datos por edad de forma descendente
+
+```{r}
+datos_ordenados <- datos_filtrados %>%
+  arrange(desc(edad))
+```
+
+Seleccionar solo las columnas de nombre y ciudad
+
+```{r}
+datos_finales <- datos_ordenados %>%
+  select(nombre, ciudad)
+```
+
+Mostrar los datos finales
+
+```{r}
+datos_finales
+```
+
+## Ejemplo 3 - Interpolación de string con glue
+
+La libreria de stringr, permite interpolar string a traves de la función `str_glue()`
+
+En este caso tenemos las siguientes constantes que colocaremos dentro del string.
+
+```{r}
+num_1 <- 2
+num_2 <- 3
+sum <- num_1 + num_2
+```
+
+Llamamos la libreria.
+
+```{r, message=FALSE}
+library(stringr)
+```
+
+Utilizamos la función `str_glue()`, pasando el texto que queremos, para incluir las constantes previamente definidas las envolvemos dentro de unos corchetes.
+
+```{r}
+str_glue("La suma de {num_1} + {num_2} es {sum}")
+```
+
+## Ejemplo 2 - Gráfica con ggplot2
 
 **Gráfica con Ggplot2**
 
