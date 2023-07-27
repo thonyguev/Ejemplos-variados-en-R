@@ -4,41 +4,139 @@
     "href": "index.html",
     "title": "Ejemplos",
     "section": "",
-    "text": "Crear un Rmarkdown que le genere un HTML con lo siguiente\nLeer el archivo en formato CSV t mostrarlo con la librería de R- DT\nEl listado se debe mostrar las columnas necesarias (en el hyperlink no debe mostrar sino la columna que dice Etiqueta)\nColoquele un logo (jpg o png)\nAdjunto documento de guía\nFecha de entrega: lunes 24 de julio - 2023\n\n\n\nRespuesta\n\nSe cargan las librerias necesarias.\n\nlibrary(stringr)\nlibrary(DT)\n\nSe lee el archivo csv.\n\nfile &lt;- read.csv(file = \"./lista-empresas.csv\")\n\nLas funciones link y tag toman un índice como argumento y devuelven el valor correspondiente en la columna Link y Etiqueta del objeto file. El doble corchete [[index]] se utiliza para acceder a un elemento específico dentro de una lista o un data frame.\n\nlink &lt;- function(index) file$Link[[index]]\ntag &lt;- function(index) file$Etiqueta[[index]]\n\nEsta línea de código asigna a la variable iterations el número de elementos en la columna Link del objeto file.\n\niterations &lt;- file$Link %&gt;% length() %&gt;% 1:.\n\nLa función lapply() aplica una función por cada iteración, en cada iteración a traves de la función str_glue() pasamos el link y la etiqueta, en un código HTML que permite crear enlaces &lt;a href=\"url\"&gt;name&lt;/a&gt;\n\nlink_convertion &lt;- lapply(iterations, function(index){\n  return(str_glue(\"&lt;a href='{link(index)}'&gt;{tag(index)}&lt;/a&gt;\"))\n})\n\nTransformamos el link_convertion en filas con rbind y posteriormente en un dataframe.\n\nnew_links &lt;- link_convertion %&gt;% do.call(rbind,.) %&gt;% data.frame(Enlace = .)\n\nCreamos un dataframe nuevo a partir del csv original, con los datos que necesitamos.\n\nfile_filter &lt;- subset(file, select = c(\"Industria\",\"Derpartmento\"))\n\nCombinamos los 2 nuevos dataframe en columnas con cbind\n\nnew_file &lt;- cbind(file_filter,new_links)\n\n\nEl nuevo dataframe resultante de la combinación, lo mostramos en un datatable, con los siguientes parametros:\n\nfilter = \"top\": mustra un barra de busqueda en la parte superior de cada columna.\nclass: permite agregar clases css como:\n\ncell-border: crear bordes por cada celda.\nhover: permite resaltar las filas cuando se pasa el cursor sobre ellas.\n\n\n\nnew_file %&gt;% datatable(escape = FALSE , filter = \"top\", class = 'cell-border hover')"
+    "text": "Asignación #2 - Separar cadenas de texto con stringr\n\n\n\n\n\n\n\nstringr\n\n\ncsv\n\n\nDT\n\n\nrbind\n\n\ncbind\n\n\ndataframe\n\n\n\n\n\n\n\n\n\n\n\nJul 27, 2023\n\n\n\n\n\n\n  \n\n\n\n\nAsignación #1\n\n\n\n\n\n\n\nstringr\n\n\nDT\n\n\ncsv\n\n\n\n\n\n\n\n\n\n\n\nJul 24, 2023\n\n\n\n\n\n\n  \n\n\n\n\nEjemplo 4\n\n\n\n\n\n\n\ndplyr\n\n\n\n\n\n\n\n\n\n\n\nJul 21, 2023\n\n\n\n\n\n\n  \n\n\n\n\nEjemplo #3 - Interpolación de string con glue\n\n\n\n\n\n\n\n\n\n\n\n\nJul 20, 2023\n\n\n\n\n\n\n  \n\n\n\n\nEjemplo #2 - Gráfica con ggplot2\n\n\n\n\n\n\n\n\n\n\n\n\nJul 19, 2023\n\n\n\n\n\n\n  \n\n\n\n\nEjemplo #1 - Histograma\n\n\n\n\n\n\n\n\n\n\n\n\nJul 18, 2023\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html#asignación-1",
     "href": "index.html#asignación-1",
     "title": "Ejemplos",
-    "section": "",
-    "text": "Crear un Rmarkdown que le genere un HTML con lo siguiente\nLeer el archivo en formato CSV t mostrarlo con la librería de R- DT\nEl listado se debe mostrar las columnas necesarias (en el hyperlink no debe mostrar sino la columna que dice Etiqueta)\nColoquele un logo (jpg o png)\nAdjunto documento de guía\nFecha de entrega: lunes 24 de julio - 2023\n\n\n\nRespuesta\n\nSe cargan las librerias necesarias.\n\nlibrary(stringr)\nlibrary(DT)\n\nSe lee el archivo csv.\n\nfile &lt;- read.csv(file = \"./lista-empresas.csv\")\n\nLas funciones link y tag toman un índice como argumento y devuelven el valor correspondiente en la columna Link y Etiqueta del objeto file. El doble corchete [[index]] se utiliza para acceder a un elemento específico dentro de una lista o un data frame.\n\nlink &lt;- function(index) file$Link[[index]]\ntag &lt;- function(index) file$Etiqueta[[index]]\n\nEsta línea de código asigna a la variable iterations el número de elementos en la columna Link del objeto file.\n\niterations &lt;- file$Link %&gt;% length() %&gt;% 1:.\n\nLa función lapply() aplica una función por cada iteración, en cada iteración a traves de la función str_glue() pasamos el link y la etiqueta, en un código HTML que permite crear enlaces &lt;a href=\"url\"&gt;name&lt;/a&gt;\n\nlink_convertion &lt;- lapply(iterations, function(index){\n  return(str_glue(\"&lt;a href='{link(index)}'&gt;{tag(index)}&lt;/a&gt;\"))\n})\n\nTransformamos el link_convertion en filas con rbind y posteriormente en un dataframe.\n\nnew_links &lt;- link_convertion %&gt;% do.call(rbind,.) %&gt;% data.frame(Enlace = .)\n\nCreamos un dataframe nuevo a partir del csv original, con los datos que necesitamos.\n\nfile_filter &lt;- subset(file, select = c(\"Industria\",\"Derpartmento\"))\n\nCombinamos los 2 nuevos dataframe en columnas con cbind\n\nnew_file &lt;- cbind(file_filter,new_links)\n\n\nEl nuevo dataframe resultante de la combinación, lo mostramos en un datatable, con los siguientes parametros:\n\nfilter = \"top\": mustra un barra de busqueda en la parte superior de cada columna.\nclass: permite agregar clases css como:\n\ncell-border: crear bordes por cada celda.\nhover: permite resaltar las filas cuando se pasa el cursor sobre ellas.\n\n\n\nnew_file %&gt;% datatable(escape = FALSE , filter = \"top\", class = 'cell-border hover')"
+    "section": "Asignación #1",
+    "text": "Asignación #1"
   },
   {
     "objectID": "index.html#ejemplo-4",
     "href": "index.html#ejemplo-4",
     "title": "Ejemplos",
-    "section": "Ejemplo 4",
-    "text": "Ejemplo 4\n\nlibrary(dplyr)\n\nCreando un data frame de ejemplo\n\ndatos &lt;- data.frame(\n  nombre = c(\"Juan\", \"María\", \"Pedro\", \"Ana\"),\n  edad = c(25, 30, 20, 35),\n  ciudad = c(\"Madrid\", \"Barcelona\", \"Valencia\", \"Sevilla\")\n)\n\nSeleccionar solo las filas con edad mayor a 25 años\n\ndatos_filtrados &lt;- datos %&gt;%\n  filter(edad &gt; 25)\n\nOrdenar los datos por edad de forma descendente\n\ndatos_ordenados &lt;- datos_filtrados %&gt;%\n  arrange(desc(edad))\n\nSeleccionar solo las columnas de nombre y ciudad\n\ndatos_finales &lt;- datos_ordenados %&gt;%\n  select(nombre, ciudad)\n\nMostrar los datos finales\n\ndatos_finales\n\n  nombre    ciudad\n1    Ana   Sevilla\n2  María Barcelona"
+    "section": "Ejemplo #4",
+    "text": "Ejemplo #4"
   },
   {
     "objectID": "index.html#ejemplo-3---interpolación-de-string-con-glue",
     "href": "index.html#ejemplo-3---interpolación-de-string-con-glue",
     "title": "Ejemplos",
-    "section": "Ejemplo 3 - Interpolación de string con glue",
-    "text": "Ejemplo 3 - Interpolación de string con glue\nLa libreria de stringr, permite interpolar string a traves de la función str_glue()\nEn este caso tenemos las siguientes constantes que colocaremos dentro del string.\n\nnum_1 &lt;- 2\nnum_2 &lt;- 3\nsum &lt;- num_1 + num_2\n\nLlamamos la libreria.\n\nlibrary(stringr)\n\nUtilizamos la función str_glue(), pasando el texto que queremos, para incluir las constantes previamente definidas las envolvemos dentro de unos corchetes.\n\nstr_glue(\"La suma de {num_1} + {num_2} es {sum}\")\n\nLa suma de 2 + 3 es 5"
+    "section": "Ejemplo #3 - Interpolación de string con glue",
+    "text": "Ejemplo #3 - Interpolación de string con glue"
   },
   {
     "objectID": "index.html#ejemplo-2---gráfica-con-ggplot2",
     "href": "index.html#ejemplo-2---gráfica-con-ggplot2",
     "title": "Ejemplos",
-    "section": "Ejemplo 2 - Gráfica con ggplot2",
-    "text": "Ejemplo 2 - Gráfica con ggplot2\nGráfica con Ggplot2\n\nlibrary(ggplot2)\n\n\ndata(iris)\n\n\nSe pasa el dataset de iris.\nse establece los elementos a evaluar, en este caso la longitud y anchura de los sépalos.\nEn el eje de la x irá la longitud, el eje de las y la anchura del sépalo, se establece la representacion por medio de puntos y por último se coloca la leyenda en la parte inferior de la gráfica.\n\n\nggplot(\n  iris,\n  aes(x = Sepal.Length, y = Sepal.Width, color = Species)) + \n  geom_point() +\n  labs(x = \"Longitud del Sépalo\", y = \"Ancho del Sépalo\") +\n  theme(legend.position = \"bottom\")"
+    "section": "Ejemplo #2 - Gráfica con ggplot2",
+    "text": "Ejemplo #2 - Gráfica con ggplot2"
   },
   {
     "objectID": "index.html#ejemplo-1---histograma",
     "href": "index.html#ejemplo-1---histograma",
     "title": "Ejemplos",
-    "section": "Ejemplo 1 - Histograma",
-    "text": "Ejemplo 1 - Histograma\nHistograma del dataset iris\nCargar el dataset iris\n\ndata(iris)\n\nCrear histograma de los valores de la longitud del sépalo\n\nhist(iris$Sepal.Length)"
+    "section": "Ejemplo #1 - Histograma",
+    "text": "Ejemplo #1 - Histograma"
+  },
+  {
+    "objectID": "test.html",
+    "href": "test.html",
+    "title": "Asignación #2 - Separa cadenas de texto con stringr",
+    "section": "",
+    "text": "En esta asignación debemos separar el nombre de la edad y la provincia del distrito, utilizando la libreria stringr\n\n\n\n\n\n\n\n\n\nRespuesta\n\nLlamamos las librerias necesarias.\n\nDT para presentar los dataframe.\nstringr para separar los valores.\n\n\nlibrary(DT)\nlibrary(stringr)\n\nLeemos el archivo csv.\n\nfile &lt;- read.csv(file = \"./DatosPeronales - StringR.csv\")\n\nVisualizamos lo que contiene el archivo.\n\nfile %&gt;% datatable()\n\n\n\n\n\n\nPodemos observar el archivo tiene 2 columnas, Nombre y Dirección, debemos separar los valores de dichas columnas.\nUtilizamos la función str_split para realizar un corte cuando encuentre dicho patrón que pasamos como segundo paramétro.\n\nEl primer paramétro de la función son datos a tratar, como el file contiene las 2 columnas, debemos seleccionar la columna a utilizar, para acceder a dicha columna utilizamos ($).\nEn este caso los nombres y edades están separados por dos divisores, un (/) y un (-) por ende pasamos el operador (|) para que evalue los dos, que si encuentra uno u otro haga el split o corte.\n\n\nsplit.name &lt;- str_split(file$Nombre,\"/ | -\")\n\nEn el caso de la columna de direción solo tiene un divisor que seria el (-)\n\nsplit.address &lt;- str_split(file$Dirección,\"-\")\n\nLa función str_split nos devuelve una lista como resultado, debemos convertir esa lista en un dataframe. En este caso apilamos o creamos filas por cada elemento de la lista llamando a rbind a traves de do.call(), luego lo convertimos en un dataframe. Esto lo realizamos en los dos resultados.\n\ncolumns.name.age &lt;- split.name %&gt;% do.call(rbind,.) %&gt;% data.frame()\n\n\ncolumns.province.district &lt;- split.address %&gt;% do.call(rbind,.) %&gt;% data.frame()\n\nLuego que tenemos los 2 dataframes lo combinamos en uno con cbind\n\nmerge.columns &lt;- cbind(columns.name.age,columns.province.district) %&gt;% data.frame()\n\nCuando tengamos el dataframe resultante debemos parsearle los nombres de las columnas que deseamos.\n\nPrimero separamos en variables cada columna del dataframe.\nLuego dentro un dataframe parseamos las variables con los nombres de las columnas.\n\n\nname &lt;- merge.columns$X1\nage &lt;- merge.columns$X2\nprovince &lt;- merge.columns$X1.1\ndistrict &lt;- merge.columns$X2.1\n\nresult &lt;- data.frame(Nombre=name, Edad=age, Provincia=province, Distrito=district)\n\nPor último pasamos el resultado a un datatable para su presentación final.\n\nresult %&gt;% datatable()"
+  },
+  {
+    "objectID": "assignment-2.html",
+    "href": "assignment-2.html",
+    "title": "Asignación #2 - Separar cadenas de texto con stringr",
+    "section": "",
+    "text": "En esta asignación debemos separar el nombre de la edad y la provincia del distrito, utilizando la libreria stringr\n\n\n\n\n\n\n\n\n\nRespuesta\n\nLlamamos las librerias necesarias.\n\nDT para presentar los dataframe.\nstringr para separar los valores.\n\n\nlibrary(DT)\nlibrary(stringr)\n\nLeemos el archivo csv.\n\nfile &lt;- read.csv(file = \"./DatosPeronales - StringR.csv\")\n\nVisualizamos lo que contiene el archivo.\n\nfile %&gt;% datatable()\n\n\n\n\n\n\nPodemos observar el archivo tiene 2 columnas, Nombre y Dirección, debemos separar los valores de dichas columnas.\nUtilizamos la función str_split para realizar un corte cuando encuentre dicho patrón que pasamos como segundo paramétro.\n\nEl primer paramétro de la función son datos a tratar, como el file contiene las 2 columnas, debemos seleccionar la columna a utilizar, para acceder a dicha columna utilizamos ($).\nEn este caso los nombres y edades están separados por dos divisores, un (/) y un (-) por ende pasamos el operador (|) para que evalue los dos, que si encuentra uno u otro haga el split o corte.\n\n\nsplit.name &lt;- str_split(file$Nombre,\"/ | -\")\n\nEn el caso de la columna de direción solo tiene un divisor que seria el (-)\n\nsplit.address &lt;- str_split(file$Dirección,\"-\")\n\nLa función str_split nos devuelve una lista como resultado, debemos convertir esa lista en un dataframe. En este caso apilamos o creamos filas por cada elemento de la lista llamando a rbind a traves de do.call(), luego lo convertimos en un dataframe. Esto lo realizamos en los dos resultados.\n\ncolumns.name.age &lt;- split.name %&gt;% do.call(rbind,.) %&gt;% data.frame()\n\n\ncolumns.province.district &lt;- split.address %&gt;% do.call(rbind,.) %&gt;% data.frame()\n\nLuego que tenemos los 2 dataframes lo combinamos en uno con cbind\n\nmerge.columns &lt;- cbind(columns.name.age,columns.province.district) %&gt;% data.frame()\n\nCuando tengamos el dataframe resultante debemos parsearle los nombres de las columnas que deseamos.\n\nPrimero separamos en variables cada columna del dataframe.\nLuego dentro un dataframe parseamos las variables con los nombres de las columnas.\n\n\nname &lt;- merge.columns$X1\nage &lt;- merge.columns$X2\nprovince &lt;- merge.columns$X1.1\ndistrict &lt;- merge.columns$X2.1\n\nresult &lt;- data.frame(Nombre=name, Edad=age, Provincia=province, Distrito=district)\n\nPor último pasamos el resultado a un datatable para su presentación final.\n\nresult %&gt;% datatable()"
+  },
+  {
+    "objectID": "index.html#asignación-2---separar-cadenas-de-texto-con-stringr",
+    "href": "index.html#asignación-2---separar-cadenas-de-texto-con-stringr",
+    "title": "Ejemplos",
+    "section": "Asignación #2 - Separar cadenas de texto con stringr",
+    "text": "Asignación #2 - Separar cadenas de texto con stringr"
+  },
+  {
+    "objectID": "assignment-1.html",
+    "href": "assignment-1.html",
+    "title": "Asignación #1",
+    "section": "",
+    "text": "Crear un Rmarkdown que le genere un HTML con lo siguiente\nLeer el archivo en formato CSV t mostrarlo con la librería de R- DT\nEl listado se debe mostrar las columnas necesarias (en el hyperlink no debe mostrar sino la columna que dice Etiqueta)\nColoquele un logo (jpg o png)\nAdjunto documento de guía\nFecha de entrega: lunes 24 de julio - 2023\n\n\n\nRespuesta\n\nSe cargan las librerias necesarias.\n\nlibrary(stringr)\nlibrary(DT)\n\nSe lee el archivo csv.\n\nfile &lt;- read.csv(file = \"./lista-empresas.csv\")\n\nLas funciones link y tag toman un índice como argumento y devuelven el valor correspondiente en la columna Link y Etiqueta del objeto file. El doble corchete [[index]] se utiliza para acceder a un elemento específico dentro de una lista o un data frame.\n\nlink &lt;- function(index) file$Link[[index]]\ntag &lt;- function(index) file$Etiqueta[[index]]\n\nEsta línea de código asigna a la variable iterations el número de elementos en la columna Link del objeto file.\n\niterations &lt;- file$Link %&gt;% length() %&gt;% 1:.\n\nLa función lapply() aplica una función por cada iteración, en cada iteración a traves de la función str_glue() pasamos el link y la etiqueta, en un código HTML que permite crear enlaces &lt;a href=\"url\"&gt;name&lt;/a&gt;\n\nlink_convertion &lt;- lapply(iterations, function(index){\n  return(str_glue(\"&lt;a href='{link(index)}'&gt;{tag(index)}&lt;/a&gt;\"))\n})\n\nTransformamos el link_convertion en filas con rbind y posteriormente en un dataframe.\n\nnew_links &lt;- link_convertion %&gt;% do.call(rbind,.) %&gt;% data.frame(Enlace = .)\n\nCreamos un dataframe nuevo a partir del csv original, con los datos que necesitamos.\n\nfile_filter &lt;- subset(file, select = c(\"Industria\",\"Derpartmento\"))\n\nCombinamos los 2 nuevos dataframe en columnas con cbind\n\nnew_file &lt;- cbind(file_filter,new_links)\n\n\nEl nuevo dataframe resultante de la combinación, lo mostramos en un datatable, con los siguientes parametros:\n\nfilter = \"top\": mustra un barra de busqueda en la parte superior de cada columna.\nclass: permite agregar clases css como:\n\ncell-border: crear bordes por cada celda.\nhover: permite resaltar las filas cuando se pasa el cursor sobre ellas.\n\n\n\nnew_file %&gt;% datatable(escape = FALSE , filter = \"top\", class = 'cell-border hover')"
+  },
+  {
+    "objectID": "sample-1.html",
+    "href": "sample-1.html",
+    "title": "Ejemplo #1 - Histograma",
+    "section": "",
+    "text": "Histograma del dataset iris\nCargar el dataset iris\n\ndata(iris)\n\nCrear histograma de los valores de la longitud del sépalo\n\nhist(iris$Sepal.Length)"
+  },
+  {
+    "objectID": "sample-4.html",
+    "href": "sample-4.html",
+    "title": "Ejemplo 4",
+    "section": "",
+    "text": "library(dplyr)\n\nCreando un data frame de ejemplo\n\ndatos &lt;- data.frame(\n  nombre = c(\"Juan\", \"María\", \"Pedro\", \"Ana\"),\n  edad = c(25, 30, 20, 35),\n  ciudad = c(\"Madrid\", \"Barcelona\", \"Valencia\", \"Sevilla\")\n)\n\nSeleccionar solo las filas con edad mayor a 25 años\n\ndatos_filtrados &lt;- datos %&gt;%\n  filter(edad &gt; 25)\n\nOrdenar los datos por edad de forma descendente\n\ndatos_ordenados &lt;- datos_filtrados %&gt;%\n  arrange(desc(edad))\n\nSeleccionar solo las columnas de nombre y ciudad\n\ndatos_finales &lt;- datos_ordenados %&gt;%\n  select(nombre, ciudad)\n\nMostrar los datos finales\n\ndatos_finales\n\n  nombre    ciudad\n1    Ana   Sevilla\n2  María Barcelona"
+  },
+  {
+    "objectID": "sample-2.html",
+    "href": "sample-2.html",
+    "title": "Ejemplo #2 - Gráfica con ggplot2",
+    "section": "",
+    "text": "Gráfica con Ggplot2\n\nlibrary(ggplot2)\n\n\ndata(iris)\n\n\nSe pasa el dataset de iris.\nse establece los elementos a evaluar, en este caso la longitud y anchura de los sépalos.\nEn el eje de la x irá la longitud, el eje de las y la anchura del sépalo, se establece la representacion por medio de puntos y por último se coloca la leyenda en la parte inferior de la gráfica.\n\n\nggplot(\n  iris,\n  aes(x = Sepal.Length, y = Sepal.Width, color = Species)) + \n  geom_point() +\n  labs(x = \"Longitud del Sépalo\", y = \"Ancho del Sépalo\") +\n  theme(legend.position = \"bottom\")"
+  },
+  {
+    "objectID": "sample-3.html",
+    "href": "sample-3.html",
+    "title": "Ejemplo #3 - Interpolación de string con glue",
+    "section": "",
+    "text": "La libreria de stringr, permite interpolar string a traves de la función str_glue()\nEn este caso tenemos las siguientes constantes que colocaremos dentro del string.\n\nnum_1 &lt;- 2\nnum_2 &lt;- 3\nsum &lt;- num_1 + num_2\n\nLlamamos la libreria.\n\nlibrary(stringr)\n\nUtilizamos la función str_glue(), pasando el texto que queremos, para incluir las constantes previamente definidas las envolvemos dentro de unos corchetes.\n\nstr_glue(\"La suma de {num_1} + {num_2} es {sum}\")\n\nLa suma de 2 + 3 es 5"
+  },
+  {
+    "objectID": "posts/assignment-1/index.html",
+    "href": "posts/assignment-1/index.html",
+    "title": "Asignación #1",
+    "section": "",
+    "text": "Crear un Rmarkdown que le genere un HTML con lo siguiente\nLeer el archivo en formato CSV t mostrarlo con la librería de R- DT\nEl listado se debe mostrar las columnas necesarias (en el hyperlink no debe mostrar sino la columna que dice Etiqueta)\nColoquele un logo (jpg o png)\nAdjunto documento de guía\nFecha de entrega: lunes 24 de julio - 2023\n\n\n\nRespuesta\n\nSe cargan las librerias necesarias.\n\nlibrary(stringr)\nlibrary(DT)\n\nSe lee el archivo csv.\n\nfile &lt;- read.csv(file = \"./lista-empresas.csv\")\n\nLas funciones link y tag toman un índice como argumento y devuelven el valor correspondiente en la columna Link y Etiqueta del objeto file. El doble corchete [[index]] se utiliza para acceder a un elemento específico dentro de una lista o un data frame.\n\nlink &lt;- function(index) file$Link[[index]]\ntag &lt;- function(index) file$Etiqueta[[index]]\n\nEsta línea de código asigna a la variable iterations el número de elementos en la columna Link del objeto file.\n\niterations &lt;- file$Link %&gt;% length() %&gt;% 1:.\n\nLa función lapply() aplica una función por cada iteración, en cada iteración a traves de la función str_glue() pasamos el link y la etiqueta, en un código HTML que permite crear enlaces &lt;a href=\"url\"&gt;name&lt;/a&gt;\n\nlink_convertion &lt;- lapply(iterations, function(index){\n  return(str_glue(\"&lt;a href='{link(index)}'&gt;{tag(index)}&lt;/a&gt;\"))\n})\n\nTransformamos el link_convertion en filas con rbind y posteriormente en un dataframe.\n\nnew_links &lt;- link_convertion %&gt;% do.call(rbind,.) %&gt;% data.frame(Enlace = .)\n\nCreamos un dataframe nuevo a partir del csv original, con los datos que necesitamos.\n\nfile_filter &lt;- subset(file, select = c(\"Industria\",\"Derpartmento\"))\n\nCombinamos los 2 nuevos dataframe en columnas con cbind\n\nnew_file &lt;- cbind(file_filter,new_links)\n\n\nEl nuevo dataframe resultante de la combinación, lo mostramos en un datatable, con los siguientes parametros:\n\nfilter = \"top\": mustra un barra de busqueda en la parte superior de cada columna.\nclass: permite agregar clases css como:\n\ncell-border: crear bordes por cada celda.\nhover: permite resaltar las filas cuando se pasa el cursor sobre ellas.\n\n\n\nnew_file %&gt;% datatable(escape = FALSE , filter = \"top\", class = 'cell-border hover')"
+  },
+  {
+    "objectID": "posts/assignment-2/index.html",
+    "href": "posts/assignment-2/index.html",
+    "title": "Asignación #2 - Separar cadenas de texto con stringr",
+    "section": "",
+    "text": "En esta asignación debemos separar el nombre de la edad y la provincia del distrito, utilizando la libreria stringr\n\n\n\n\n\n\n\n\n\nRespuesta\n\nLlamamos las librerias necesarias.\n\nDT para presentar los dataframe.\nstringr para separar los valores.\n\n\nlibrary(DT)\nlibrary(stringr)\n\nLeemos el archivo csv.\n\nfile &lt;- read.csv(file = \"./DatosPeronales - StringR.csv\")\n\nVisualizamos lo que contiene el archivo.\n\nfile %&gt;% datatable()\n\n\n\n\n\n\nPodemos observar el archivo tiene 2 columnas, Nombre y Dirección, debemos separar los valores de dichas columnas.\nUtilizamos la función str_split para realizar un corte cuando encuentre dicho patrón que pasamos como segundo paramétro.\n\nEl primer paramétro de la función son datos a tratar, como el file contiene las 2 columnas, debemos seleccionar la columna a utilizar, para acceder a dicha columna utilizamos ($).\nEn este caso los nombres y edades están separados por dos divisores, un (/) y un (-) por ende pasamos el operador (|) para que evalue los dos, que si encuentra uno u otro haga el split o corte.\n\n\nsplit.name &lt;- str_split(file$Nombre,\"/ | -\")\n\nEn el caso de la columna de direción solo tiene un divisor que seria el (-)\n\nsplit.address &lt;- str_split(file$Dirección,\"-\")\n\nLa función str_split nos devuelve una lista como resultado, debemos convertir esa lista en un dataframe. En este caso apilamos o creamos filas por cada elemento de la lista llamando a rbind a traves de do.call(), luego lo convertimos en un dataframe. Esto lo realizamos en los dos resultados.\n\ncolumns.name.age &lt;- split.name %&gt;% do.call(rbind,.) %&gt;% data.frame()\n\n\ncolumns.province.district &lt;- split.address %&gt;% do.call(rbind,.) %&gt;% data.frame()\n\nLuego que tenemos los 2 dataframes lo combinamos en uno con cbind\n\nmerge.columns &lt;- cbind(columns.name.age,columns.province.district) %&gt;% data.frame()\n\nCuando tengamos el dataframe resultante debemos parsearle los nombres de las columnas que deseamos.\n\nPrimero separamos en variables cada columna del dataframe.\nLuego dentro un dataframe parseamos las variables con los nombres de las columnas.\n\n\nname &lt;- merge.columns$X1\nage &lt;- merge.columns$X2\nprovince &lt;- merge.columns$X1.1\ndistrict &lt;- merge.columns$X2.1\n\nresult &lt;- data.frame(Nombre=name, Edad=age, Provincia=province, Distrito=district)\n\nPor último pasamos el resultado a un datatable para su presentación final.\n\nresult %&gt;% datatable()"
+  },
+  {
+    "objectID": "posts/sample-3/index.html",
+    "href": "posts/sample-3/index.html",
+    "title": "Ejemplo #3 - Interpolación de string con glue",
+    "section": "",
+    "text": "La libreria de stringr, permite interpolar string a traves de la función str_glue()\nEn este caso tenemos las siguientes constantes que colocaremos dentro del string.\n\nnum_1 &lt;- 2\nnum_2 &lt;- 3\nsum &lt;- num_1 + num_2\n\nLlamamos la libreria.\n\nlibrary(stringr)\n\nUtilizamos la función str_glue(), pasando el texto que queremos, para incluir las constantes previamente definidas las envolvemos dentro de unos corchetes.\n\nstr_glue(\"La suma de {num_1} + {num_2} es {sum}\")\n\nLa suma de 2 + 3 es 5"
+  },
+  {
+    "objectID": "posts/sample-1/index.html",
+    "href": "posts/sample-1/index.html",
+    "title": "Ejemplo #1 - Histograma",
+    "section": "",
+    "text": "Histograma del dataset iris\nCargar el dataset iris\n\ndata(iris)\n\nCrear histograma de los valores de la longitud del sépalo\n\nhist(iris$Sepal.Length)"
+  },
+  {
+    "objectID": "posts/sample-2/index.html",
+    "href": "posts/sample-2/index.html",
+    "title": "Ejemplo #2 - Gráfica con ggplot2",
+    "section": "",
+    "text": "Gráfica con Ggplot2\n\nlibrary(ggplot2)\n\n\ndata(iris)\n\n\nSe pasa el dataset de iris.\nse establece los elementos a evaluar, en este caso la longitud y anchura de los sépalos.\nEn el eje de la x irá la longitud, el eje de las y la anchura del sépalo, se establece la representacion por medio de puntos y por último se coloca la leyenda en la parte inferior de la gráfica.\n\n\nggplot(\n  iris,\n  aes(x = Sepal.Length, y = Sepal.Width, color = Species)) + \n  geom_point() +\n  labs(x = \"Longitud del Sépalo\", y = \"Ancho del Sépalo\") +\n  theme(legend.position = \"bottom\")"
+  },
+  {
+    "objectID": "posts/sample-4/index.html",
+    "href": "posts/sample-4/index.html",
+    "title": "Ejemplo 4",
+    "section": "",
+    "text": "library(dplyr)\n\nCreando un data frame de ejemplo\n\ndatos &lt;- data.frame(\n  nombre = c(\"Juan\", \"María\", \"Pedro\", \"Ana\"),\n  edad = c(25, 30, 20, 35),\n  ciudad = c(\"Madrid\", \"Barcelona\", \"Valencia\", \"Sevilla\")\n)\n\nSeleccionar solo las filas con edad mayor a 25 años\n\ndatos_filtrados &lt;- datos %&gt;%\n  filter(edad &gt; 25)\n\nOrdenar los datos por edad de forma descendente\n\ndatos_ordenados &lt;- datos_filtrados %&gt;%\n  arrange(desc(edad))\n\nSeleccionar solo las columnas de nombre y ciudad\n\ndatos_finales &lt;- datos_ordenados %&gt;%\n  select(nombre, ciudad)\n\nMostrar los datos finales\n\ndatos_finales\n\n  nombre    ciudad\n1    Ana   Sevilla\n2  María Barcelona"
   }
 ]

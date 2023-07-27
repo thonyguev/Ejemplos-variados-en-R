@@ -1,0 +1,26 @@
+---
+title: "Ejemplo #3 - Interpolación de string con glue"
+date: "2023-07-20"
+---
+
+La libreria de stringr, permite interpolar string a traves de la función `str_glue()`
+
+En este caso tenemos las siguientes constantes que colocaremos dentro del string.
+
+```{r}
+num_1 <- 2
+num_2 <- 3
+sum <- num_1 + num_2
+```
+
+Llamamos la libreria.
+
+```{r, message=FALSE}
+library(stringr)
+```
+
+Utilizamos la función `str_glue()`, pasando el texto que queremos, para incluir las constantes previamente definidas las envolvemos dentro de unos corchetes.
+
+```{r}
+str_glue("La suma de {num_1} + {num_2} es {sum}")
+```

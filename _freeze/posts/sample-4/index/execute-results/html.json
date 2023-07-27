@@ -1,0 +1,14 @@
+{
+  "hash": "de7f18f8c4619ef1f7e4862f9c138dc7",
+  "result": {
+    "markdown": "---\ntitle: \"Ejemplo 4\"\ndate: \"2023-07-21\"\ncategories:\n  - dplyr\n---\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(dplyr)\n```\n:::\n\n\nCreando un data frame de ejemplo\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndatos <- data.frame(\n  nombre = c(\"Juan\", \"María\", \"Pedro\", \"Ana\"),\n  edad = c(25, 30, 20, 35),\n  ciudad = c(\"Madrid\", \"Barcelona\", \"Valencia\", \"Sevilla\")\n)\n```\n:::\n\n\nSeleccionar solo las filas con edad mayor a 25 años\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndatos_filtrados <- datos %>%\n  filter(edad > 25)\n```\n:::\n\n\nOrdenar los datos por edad de forma descendente\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndatos_ordenados <- datos_filtrados %>%\n  arrange(desc(edad))\n```\n:::\n\n\nSeleccionar solo las columnas de nombre y ciudad\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndatos_finales <- datos_ordenados %>%\n  select(nombre, ciudad)\n```\n:::\n\n\nMostrar los datos finales\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndatos_finales\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n  nombre    ciudad\n1    Ana   Sevilla\n2  María Barcelona\n```\n:::\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

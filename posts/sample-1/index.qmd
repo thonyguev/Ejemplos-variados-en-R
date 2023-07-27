@@ -1,0 +1,18 @@
+---
+title: "Ejemplo #1 - Histograma"
+date: "2023-07-18"
+---
+
+**Histograma del dataset iris**
+
+Cargar el dataset iris
+
+```{r}
+data(iris)
+```
+
+Crear histograma de los valores de la longitud del sépalo
+
+```{r}
+hist(iris$Sepal.Length)
+```

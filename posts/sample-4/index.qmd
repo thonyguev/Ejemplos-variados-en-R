@@ -1,0 +1,47 @@
+---
+title: "Ejemplo 4"
+date: "2023-07-21"
+categories:
+  - dplyr
+---
+
+```{r, message=FALSE}
+library(dplyr)
+```
+
+Creando un data frame de ejemplo
+
+```{r}
+datos <- data.frame(
+  nombre = c("Juan", "María", "Pedro", "Ana"),
+  edad = c(25, 30, 20, 35),
+  ciudad = c("Madrid", "Barcelona", "Valencia", "Sevilla")
+)
+```
+
+Seleccionar solo las filas con edad mayor a 25 años
+
+```{r}
+datos_filtrados <- datos %>%
+  filter(edad > 25)
+```
+
+Ordenar los datos por edad de forma descendente
+
+```{r}
+datos_ordenados <- datos_filtrados %>%
+  arrange(desc(edad))
+```
+
+Seleccionar solo las columnas de nombre y ciudad
+
+```{r}
+datos_finales <- datos_ordenados %>%
+  select(nombre, ciudad)
+```
+
+Mostrar los datos finales
+
+```{r}
+datos_finales
+```

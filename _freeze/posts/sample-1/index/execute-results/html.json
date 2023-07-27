@@ -1,0 +1,16 @@
+{
+  "hash": "c54bbeb567f265a77f2468e1e0e6b42b",
+  "result": {
+    "markdown": "---\ntitle: \"Ejemplo #1 - Histograma\"\ndate: \"2023-07-18\"\n---\n\n\n**Histograma del dataset iris**\n\nCargar el dataset iris\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndata(iris)\n```\n:::\n\n\nCrear histograma de los valores de la longitud del sépalo\n\n\n::: {.cell}\n\n```{.r .cell-code}\nhist(iris$Sepal.Length)\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-2-1.png){width=672}\n:::\n:::\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

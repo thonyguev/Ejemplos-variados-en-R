@@ -1,0 +1,14 @@
+{
+  "hash": "a171d924a70b2e9c07409aafc787d307",
+  "result": {
+    "markdown": "---\ntitle: \"Ejemplo #3 - Interpolación de string con glue\"\ndate: \"2023-07-20\"\n---\n\n\nLa libreria de stringr, permite interpolar string a traves de la función `str_glue()`\n\nEn este caso tenemos las siguientes constantes que colocaremos dentro del string.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nnum_1 <- 2\nnum_2 <- 3\nsum <- num_1 + num_2\n```\n:::\n\n\nLlamamos la libreria.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(stringr)\n```\n:::\n\n\nUtilizamos la función `str_glue()`, pasando el texto que queremos, para incluir las constantes previamente definidas las envolvemos dentro de unos corchetes.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nstr_glue(\"La suma de {num_1} + {num_2} es {sum}\")\n```\n\n::: {.cell-output .cell-output-stdout}\n```\nLa suma de 2 + 3 es 5\n```\n:::\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

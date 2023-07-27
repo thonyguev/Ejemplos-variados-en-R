@@ -5,19 +5,15 @@ project:
 website:
   title: "Ejemplos variados en R"
   navbar:
-    left:
+    right: 
       - index.qmd
-      - href: https://github.com/thonyguev/Ejemplos-variados-en-R
-        icon: github
-        text: repositorio
+      - icon: github
+        href: https://github.com/thonyguev/Ejemplos-variados-en-R
 
 format:
   html:
-    theme: 
-      light: litera
-      dark: superhero
+    theme: cosmo
     css: styles.css
-    toc: true
 
-editor: visual
+editor: source
 

@@ -1,0 +1,16 @@
+{
+  "hash": "2acf3485b1b744fb019c8cd3bbdab8cb",
+  "result": {
+    "markdown": "---\ntitle: \"Ejemplo #2 - Gráfica con ggplot2\"\ndate: \"2023-07-19\"\n---\n\n\n**Gráfica con Ggplot2**\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(ggplot2)\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\ndata(iris)\n```\n:::\n\n\n-   Se pasa el dataset de iris.\n\n-   se establece los elementos a evaluar, en este caso la longitud y anchura de los sépalos.\n\n-   En el eje de la `x` irá la longitud, el eje de las `y` la anchura del sépalo, se establece la representacion por medio de puntos y por último se coloca la leyenda en la parte inferior de la gráfica.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nggplot(\n  iris,\n  aes(x = Sepal.Length, y = Sepal.Width, color = Species)) + \n  geom_point() +\n  labs(x = \"Longitud del Sépalo\", y = \"Ancho del Sépalo\") +\n  theme(legend.position = \"bottom\")\n```\n\n::: {.cell-output-display}\n![](index_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n:::\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
