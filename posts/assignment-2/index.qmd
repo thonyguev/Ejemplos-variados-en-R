@@ -1,0 +1,102 @@
+---
+title: "Asignación #2 - Separar cadenas de texto con stringr"
+date: "2023-07-27"
+categories:
+  - stringr
+  - csv
+  - DT
+  - rbind
+  - cbind
+  - dataframe
+---
+
+En esta asignación debemos separar el nombre de la edad y la provincia del distrito, utilizando la libreria **`stringr`**
+```{r, echo=FALSE}
+library(DT)
+file.preview <- read.csv(file = "./DatosPeronales - StringR.csv")
+file.preview %>% datatable(options = list(searching = FALSE, lengthChange = FALSE, paging = FALSE))
+```
+
+
+<details>
+
+<summary><b>Respuesta</b></summary>
+
+Llamamos las librerias necesarias.
+
+-   **`DT`** para presentar los dataframe.
+
+-   **`stringr`** para separar los valores.
+
+```{r, message=FALSE}
+library(DT)
+library(stringr)
+```
+
+Leemos el archivo csv.
+
+```{r}
+file <- read.csv(file = "./DatosPeronales - StringR.csv")
+```
+
+Visualizamos lo que contiene el archivo.
+
+```{r}
+file %>% datatable()
+```
+
+Podemos observar el archivo tiene 2 columnas, Nombre y Dirección, debemos separar los valores de dichas columnas.
+
+Utilizamos la función **`str_split`** para realizar un corte cuando encuentre dicho patrón que pasamos como segundo paramétro.
+
+-   El primer paramétro de la función son datos a tratar, como el file contiene las 2 columnas, debemos seleccionar la columna a utilizar, para acceder a dicha columna utilizamos (**`$`**).
+
+-   En este caso los nombres y edades están separados por dos divisores, un (**`/`**) y un (**`-`**) por ende pasamos el operador (**`|`**) para que evalue los dos, que si encuentra uno u otro haga el split o corte.
+
+```{r}
+split.name <- str_split(file$Nombre,"/ | -")
+```
+
+En el caso de la columna de direción solo tiene un divisor que seria el (**`-`**)
+
+```{r}
+split.address <- str_split(file$Dirección,"-")
+```
+
+La función **`str_split`** nos devuelve una lista como resultado, debemos convertir esa lista en un dataframe. En este caso apilamos o creamos filas por cada elemento de la lista llamando a **`rbind`** a traves de **`do.call()`**, luego lo convertimos en un dataframe. Esto lo realizamos en los dos resultados.
+
+```{r}
+columns.name.age <- split.name %>% do.call(rbind,.) %>% data.frame()
+```
+
+```{r}
+columns.province.district <- split.address %>% do.call(rbind,.) %>% data.frame()
+```
+
+Luego que tenemos los 2 dataframes lo combinamos en uno con **`cbind`**
+
+```{r}
+merge.columns <- cbind(columns.name.age,columns.province.district) %>% data.frame()
+
+```
+
+Cuando tengamos el dataframe resultante debemos parsearle los nombres de las columnas que deseamos.
+
+-   Primero separamos en variables cada columna del dataframe.
+-   Luego dentro un dataframe parseamos las variables con los nombres de las columnas.
+
+```{r}
+
+name <- merge.columns$X1
+age <- merge.columns$X2
+province <- merge.columns$X1.1
+district <- merge.columns$X2.1
+
+result <- data.frame(Nombre=name, Edad=age, Provincia=province, Distrito=district)
+```
+Por último pasamos el resultado a un datatable para su presentación final.
+```{r}
+result %>% datatable()
+```
+
+</details>
