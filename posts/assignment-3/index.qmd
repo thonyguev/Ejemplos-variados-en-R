@@ -1,0 +1,90 @@
+---
+title: "Asignación #3 - HyperLink"
+date: "2023-07-27"
+categories:
+  - xlsx
+  - readxl
+  - DT
+  - dataframe
+  - dplyr
+draft: false
+---
+
+Debe combinar la columna **`Category`** y **`Link`**, para formar un hipervinculo.
+```{r, echo=FALSE}
+library(DT)
+library(readxl)
+file.preview <- read_excel(path = "./dp-gallery-link.xlsx")
+file.preview %>% datatable()
+```
+
+<details>
+
+<summary>**Respuesta**</summary>
+
+Librerias necesarias.
+```{r, message=FALSE}
+library(readxl)
+library(stringr)
+library(DT)
+library(dplyr)
+```
+
+Leemos el archivo de excel y lo visualizamos.
+```{r}
+file <- read_excel(path = "./dp-gallery-link.xlsx")
+file
+```
+
+Creamos un dataframe que contenga la columna **`Category`** y **`Link`** y otro solo **`Area`**.
+```{r}
+columns.category.link <- subset(file, select = c("Category", "Link"))
+column.area <- subset(file, select = c("Area"))
+```
+
+Combinamos el dataframe de **`Category`** y **`Link`** para crear el hipervinculo.
+
+-    Creamos un vector llamado **`iterations`** que contiene una secuencia de números enteros que van desde **`1`** hasta la longitud del vector **`columns.category.link$Category`**.
+
+-    Se utiliza la función **`lapply()`** para crear una lista de hipervínculos a partir de dos vectores en un dataframe llamado **`columns.category.link`**.
+
+-    La función anónima toma el índice actual del elemento y lo utiliza para extraer el valor correspondiente de las columnas **`Category`** y **`Link`** del dataframe **`columns.category.link`**.
+
+-    Los hipervínculos se crean utilizando la función **`str_glue()`** de la libreria **`stringr`** para concatenar la etiqueta del hipervínculo y la URL.
+```{r}
+iterations <- columns.category.link$Category %>% length() %>% 1:.
+
+hyperlink <- lapply(iterations, function(index) {
+    category <- columns.category.link$Category[[index]]
+    link <- columns.category.link$Link[[index]]
+    str_glue("<a href='{link}'>{category}</a>") %>% return()
+})
+```
+-    La lista hyperlink le apilamos sus valores con **`do.call(rbind)`** y luego lo convertimos en un dataframe con encabezado **`Hyperlink`**
+
+-    Posteriormente combinamos el dataframe **`column.area`** y **`column.hyperlink`** con **`cbind()`**.
+```{r}
+column.hyperlink <- hyperlink %>% do.call(rbind, .) %>% data.frame(Hyperlink = .)
+result <- cbind(column.area, column.hyperlink)
+```
+
+### Tabla Normal
+```{r}
+result %>% datatable(
+  escape = FALSE, 
+  rownames = FALSE
+)
+```
+### Tabla - Valores agrupados por Area
+```{r}
+datatable(
+  result[order(result$Area), ],
+  escape = FALSE, 
+  extensions = "RowGroup", 
+  options = list(
+    rowGroup = list(dataSrc = 0)
+  ),
+  rownames = FALSE
+)
+```
+</details>
