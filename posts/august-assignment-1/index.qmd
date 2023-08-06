@@ -1,0 +1,77 @@
+---
+title: "Asignación # 1 – Data Engineering – Limpieza de Datos"
+date: "2023-08-05"
+date-modified: "2023-08-06"
+categories: 
+  - Agosto
+  - DT
+  - readxl
+  - stringr
+---
+
+Fecha de entrega: miércoles 10 de agosto-2023
+
+Buscar en R, funciones que de librerias que ya permiten arreglar los datos:
+
+Trabajo en equipo, la entrega es individual
+
+Stringr y otras – investigar – compartir conocimientos entre todos
+
+1.	Completar los datos que en la conversión no pasaron – Fotovoltaicas
+2.	Hacer un diagnóstico con R del Dataset, muestre el script y su resultado, hacer un gráfico por cada situación identificada del diagnóstico (Ejm cantidad de variables categóricas, cantidad de variables numéricas, variables en cero, variables negativas)
+a.	Qué columnas son variables categóricas - cualitativas
+b.	Qué variables son variables numéricas – cuantitativas
+c.	Identifique que variables tienen valores nulos o ceros
+d.	Espacios en blancos en los textos
+
+3.	Estandarizar los nombres de columnas y los datos
+a.	Columnas – nombres de columnas en minúsculas
+b.	Texto – los textos la Primera Letra Mayúscula, el resto minúsculas
+c.	Mejorar el texto si espacios en blancos
+4.	Eliminar con R las columnas de porcentajes
+5.	Luego hacer un Tidyverse un Gather del Dataset donde debe quedar así
+a.	Planta, Tipo Energia, Valor
+
+## Librerias
+```{r, message=FALSE}
+library(stringr)
+library(readxl)
+library(DT)
+```
+
+## Lectura del archivo excel
+```{r, message=FALSE}
+file <- read_excel("./datos_energia-taller-con-datos-fotovoltaicas.xlsx")
+```
+
+## Archivo Original
+```{r}
+file %>% datatable(class = c("compact","cell-border"), callback = JS('table.page(3).draw(false);'))
+```
+
+## Eliminando las celdas vacias
+```{r} 
+file.trimmed <- file %>% na.omit()
+```
+
+```{r}
+file.trimmed  %>% datatable(class = c("compact","cell-border"), callback = JS('table.page(3).draw(false);'))
+```
+
+# Eliminamos la numeración y guiones de la columna de **`ID-PLANTA`**
+```{r}
+split.column.id.planta <- str_split(file.trimmed$`ID-PLANTA`, pattern = "-")
+```
+
+```{r}
+new.column.id.planta <- split.column.id.planta %>% do.call(rbind,.) %>% data.frame() %>% .$X2
+```
+
+```{r}
+file.trimmed$`ID-PLANTA` <- new.column.id.planta
+```
+
+```{r}
+file.trimmed %>% datatable(class = c("compact","cell-border"), callback = JS('table.page(3).draw(false);'))
+```
+

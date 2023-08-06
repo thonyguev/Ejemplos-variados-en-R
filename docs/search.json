@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Ejemplos",
     "section": "",
-    "text": "Asignación #2 - Separar cadenas de texto con stringr\n\n\n\n\n\n\n\nstringr\n\n\ncsv\n\n\nDT\n\n\nrbind\n\n\ncbind\n\n\ndataframe\n\n\n\n\n\n\n\n\n\n\n\nJul 27, 2023\n\n\n\n\n\n\n  \n\n\n\n\nAsignación #3 - HyperLink\n\n\n\n\n\n\n\nxlsx\n\n\nreadxl\n\n\nDT\n\n\ndataframe\n\n\ndplyr\n\n\n\n\n\n\n\n\n\n\n\nJul 27, 2023\n\n\n\n\n\n\n  \n\n\n\n\nAsignación #1\n\n\n\n\n\n\n\nstringr\n\n\nDT\n\n\ncsv\n\n\n\n\n\n\n\n\n\n\n\nJul 24, 2023\n\n\n\n\n\n\n  \n\n\n\n\nEjemplo 4\n\n\n\n\n\n\n\ndplyr\n\n\n\n\n\n\n\n\n\n\n\nJul 21, 2023\n\n\n\n\n\n\n  \n\n\n\n\nEjemplo #3 - Interpolación de string con glue\n\n\n\n\n\n\n\n\n\n\n\n\nJul 20, 2023\n\n\n\n\n\n\n  \n\n\n\n\nEjemplo #2 - Gráfica con ggplot2\n\n\n\n\n\n\n\n\n\n\n\n\nJul 19, 2023\n\n\n\n\n\n\n  \n\n\n\n\nEjemplo #1 - Histograma\n\n\n\n\n\n\n\n\n\n\n\n\nJul 18, 2023\n\n\n\n\n\n\nNo matching items"
+    "text": "Asignación # 1 – Data Engineering – Limpieza de Datos\n\n\n\n\n\n\n\nAgosto\n\n\nDT\n\n\nreadxl\n\n\nstringr\n\n\n\n\n\n\n\n\n\n\n\nAug 5, 2023\n\n\n\n\n\n\n  \n\n\n\n\nAsignación #2 - Separar cadenas de texto con stringr\n\n\n\n\n\n\n\nstringr\n\n\ncsv\n\n\nDT\n\n\nrbind\n\n\ncbind\n\n\ndataframe\n\n\n\n\n\n\n\n\n\n\n\nJul 27, 2023\n\n\n\n\n\n\n  \n\n\n\n\nAsignación #3 - HyperLink\n\n\n\n\n\n\n\nxlsx\n\n\nreadxl\n\n\nDT\n\n\ndataframe\n\n\ndplyr\n\n\n\n\n\n\n\n\n\n\n\nJul 27, 2023\n\n\n\n\n\n\n  \n\n\n\n\nAsignación #1\n\n\n\n\n\n\n\nstringr\n\n\nDT\n\n\ncsv\n\n\n\n\n\n\n\n\n\n\n\nJul 24, 2023\n\n\n\n\n\n\n  \n\n\n\n\nEjemplo 4\n\n\n\n\n\n\n\ndplyr\n\n\n\n\n\n\n\n\n\n\n\nJul 21, 2023\n\n\n\n\n\n\n  \n\n\n\n\nEjemplo #3 - Interpolación de string con glue\n\n\n\n\n\n\n\n\n\n\n\n\nJul 20, 2023\n\n\n\n\n\n\n  \n\n\n\n\nEjemplo #2 - Gráfica con ggplot2\n\n\n\n\n\n\n\n\n\n\n\n\nJul 19, 2023\n\n\n\n\n\n\n  \n\n\n\n\nEjemplo #1 - Histograma\n\n\n\n\n\n\n\n\n\n\n\n\nJul 18, 2023\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html#asignación-1",
@@ -145,5 +145,82 @@
     "title": "Asignación #3 - HyperLink",
     "section": "",
     "text": "Debe combinar la columna Category y Link, para formar un hipervinculo.\n\n\n\n\n\n\n\n\n\nRespuesta\n\nLibrerias necesarias.\n\nlibrary(readxl)\nlibrary(stringr)\nlibrary(DT)\nlibrary(dplyr)\n\nLeemos el archivo de excel y lo visualizamos.\n\nfile &lt;- read_excel(path = \"./dp-gallery-link.xlsx\")\nfile\n\n# A tibble: 37 × 4\n     `#` Area               Category       Link                                 \n   &lt;dbl&gt; &lt;chr&gt;              &lt;chr&gt;          &lt;chr&gt;                                \n 1     1 Health             Cadio Vascular https://dataspeople.ai/post/gallery/…\n 2     2 Agriculture        Wine           https://dataspeople.ai/post/gallery/…\n 3     3 World Economic     Wolrd Econimic https://dataspeople.ai/post/gallery/…\n 4     4 Financial Services Credit         https://dataspeople.ai/post/gallery/…\n 5     5 Insurance          Cars Loss      https://dataspeople.ai/post/gallery/…\n 6     6 Logistic           Supply Chain   https://dataspeople.ai/post/gallery/…\n 7     7 Ambient            Forest Fire    https://dataspeople.ai/post/gallery/…\n 8     8 Retail-Sales       Supermarket    https://dataspeople.ai/post/gallery/…\n 9     9 Health             Disease        https://dataspeople.ai/post/gallery/…\n10    10 Real Estate        Real Estate    https://dataspeople.ai/post/gallery/…\n# ℹ 27 more rows\n\n\nCreamos un dataframe que contenga la columna Category y Link y otro solo Area.\n\ncolumns.category.link &lt;- subset(file, select = c(\"Category\", \"Link\"))\ncolumn.area &lt;- subset(file, select = c(\"Area\"))\n\nCombinamos el dataframe de Category y Link para crear el hipervinculo.\n\nCreamos un vector llamado iterations que contiene una secuencia de números enteros que van desde 1 hasta la longitud del vector columns.category.link$Category.\nSe utiliza la función lapply() para crear una lista de hipervínculos a partir de dos vectores en un dataframe llamado columns.category.link.\nLa función anónima toma el índice actual del elemento y lo utiliza para extraer el valor correspondiente de las columnas Category y Link del dataframe columns.category.link.\nLos hipervínculos se crean utilizando la función str_glue() de la libreria stringr para concatenar la etiqueta del hipervínculo y la URL.\n\n\niterations &lt;- columns.category.link$Category %&gt;% length() %&gt;% 1:.\n\nhyperlink &lt;- lapply(iterations, function(index) {\n    category &lt;- columns.category.link$Category[[index]]\n    link &lt;- columns.category.link$Link[[index]]\n    str_glue(\"&lt;a href='{link}'&gt;{category}&lt;/a&gt;\") %&gt;% return()\n})\n\n\nLa lista hyperlink le apilamos sus valores con do.call(rbind) y luego lo convertimos en un dataframe con encabezado Hyperlink\nPosteriormente combinamos el dataframe column.area y column.hyperlink con cbind().\n\n\ncolumn.hyperlink &lt;- hyperlink %&gt;% do.call(rbind, .) %&gt;% data.frame(Hyperlink = .)\nresult &lt;- cbind(column.area, column.hyperlink)\n\n\nTabla Normal\n\nresult %&gt;% datatable(\n  escape = FALSE, \n  rownames = FALSE\n)\n\n\n\n\n\n\n\n\nTabla - Valores agrupados por Area\n\ndatatable(\n  result[order(result$Area), ],\n  escape = FALSE, \n  extensions = \"RowGroup\", \n  options = list(\n    rowGroup = list(dataSrc = 0)\n  ),\n  rownames = FALSE\n)"
+  },
+  {
+    "objectID": "posts/assignment-3/assignment-3.html",
+    "href": "posts/assignment-3/assignment-3.html",
+    "title": "Asignación #3 - HyperLink",
+    "section": "",
+    "text": "Debe combinar la columna Category y Link, para formar un hipervinculo.\n\n\n\n\n\n\n\n\n\nRespuesta\n\nLibrerias necesarias.\n\nlibrary(readxl)\nlibrary(stringr)\nlibrary(DT)\nlibrary(dplyr)\n\nLeemos el archivo de excel y lo visualizamos.\n\nfile &lt;- read_excel(path = \"./dp-gallery-link.xlsx\")\nfile\n\n# A tibble: 37 × 4\n     `#` Area               Category       Link                                 \n   &lt;dbl&gt; &lt;chr&gt;              &lt;chr&gt;          &lt;chr&gt;                                \n 1     1 Health             Cadio Vascular https://dataspeople.ai/post/gallery/…\n 2     2 Agriculture        Wine           https://dataspeople.ai/post/gallery/…\n 3     3 World Economic     Wolrd Econimic https://dataspeople.ai/post/gallery/…\n 4     4 Financial Services Credit         https://dataspeople.ai/post/gallery/…\n 5     5 Insurance          Cars Loss      https://dataspeople.ai/post/gallery/…\n 6     6 Logistic           Supply Chain   https://dataspeople.ai/post/gallery/…\n 7     7 Ambient            Forest Fire    https://dataspeople.ai/post/gallery/…\n 8     8 Retail-Sales       Supermarket    https://dataspeople.ai/post/gallery/…\n 9     9 Health             Disease        https://dataspeople.ai/post/gallery/…\n10    10 Real Estate        Real Estate    https://dataspeople.ai/post/gallery/…\n# ℹ 27 more rows\n\n\nCreamos un dataframe que contenga la columna Category y Link y otro solo Area.\n\ncolumns.category.link &lt;- subset(file, select = c(\"Category\", \"Link\"))\ncolumn.area &lt;- subset(file, select = c(\"Area\"))\n\nCombinamos el dataframe de Category y Link para crear el hipervinculo.\n\nCreamos un vector llamado iterations que contiene una secuencia de números enteros que van desde 1 hasta la longitud del vector columns.category.link$Category.\nSe utiliza la función lapply() para crear una lista de hipervínculos a partir de dos vectores en un dataframe llamado columns.category.link.\nLa función anónima toma el índice actual del elemento y lo utiliza para extraer el valor correspondiente de las columnas Category y Link del dataframe columns.category.link.\nLos hipervínculos se crean utilizando la función str_glue() de la libreria stringr para concatenar la etiqueta del hipervínculo y la URL.\n\n\niterations &lt;- columns.category.link$Category %&gt;% length() %&gt;% 1:.\n\nhyperlink &lt;- lapply(iterations, function(index) {\n    category &lt;- columns.category.link$Category[[index]]\n    link &lt;- columns.category.link$Link[[index]]\n    str_glue(\"&lt;a href='{link}'&gt;{category}&lt;/a&gt;\") %&gt;% return()\n})\n\n\nLa lista hyperlink le apilamos sus valores con do.call(rbind) y luego lo convertimos en un dataframe con encabezado Hyperlink\nPosteriormente combinamos el dataframe column.area y column.hyperlink con cbind().\n\n\ncolumn.hyperlink &lt;- hyperlink %&gt;% do.call(rbind, .) %&gt;% data.frame(Hyperlink = .)\nresult &lt;- cbind(column.area, column.hyperlink)\n\n\nTabla Normal\n\nresult %&gt;% datatable(\n  escape = FALSE, \n  rownames = FALSE\n)\n\n\n\n\n\n\n\n\nTabla - Valores agrupados por Area\n\ndatatable(\n  result[order(result$Area), ],\n  escape = FALSE, \n  extensions = \"RowGroup\", \n  options = list(\n    rowGroup = list(dataSrc = 0)\n  ),\n  rownames = FALSE\n)"
+  },
+  {
+    "objectID": "posts/prueba/index.html",
+    "href": "posts/prueba/index.html",
+    "title": "Asignación # 1 – Data Engineering – Limpieza de Datos",
+    "section": "",
+    "text": "Fecha de entrega: miércoles 10 de agosto-2023\nBuscar en R, funciones que de librerias que ya permiten arreglar los datos:\nTrabajo en equipo, la entrega es individual\nStringr y otras – investigar – compartir conocimientos entre todos"
+  },
+  {
+    "objectID": "posts/prueba/index.html#archivo-original",
+    "href": "posts/prueba/index.html#archivo-original",
+    "title": "Asignación # 1 – Data Engineering – Limpieza de Datos",
+    "section": "Archivo Original",
+    "text": "Archivo Original\n\nfile %&gt;% datatable(class = c(\"compact\",\"cell-border\"), callback = JS('table.page(3).draw(false);'))"
+  },
+  {
+    "objectID": "posts/prueba/index.html#librerias",
+    "href": "posts/prueba/index.html#librerias",
+    "title": "Asignación # 1 – Data Engineering – Limpieza de Datos",
+    "section": "Librerias",
+    "text": "Librerias\n\nlibrary(stringr)\nlibrary(readxl)\nlibrary(DT)"
+  },
+  {
+    "objectID": "posts/prueba/index.html#lectura-del-archivo-excel",
+    "href": "posts/prueba/index.html#lectura-del-archivo-excel",
+    "title": "Asignación # 1 – Data Engineering – Limpieza de Datos",
+    "section": "Lectura del archivo excel",
+    "text": "Lectura del archivo excel\n\nfile &lt;- read_excel(\"./datos_energia-taller-con-datos-fotovoltaicas.xlsx\")"
+  },
+  {
+    "objectID": "posts/prueba/index.html#eliminando-las-celdas-vacias",
+    "href": "posts/prueba/index.html#eliminando-las-celdas-vacias",
+    "title": "Asignación # 1 – Data Engineering – Limpieza de Datos",
+    "section": "Eliminando las celdas vacias",
+    "text": "Eliminando las celdas vacias\n\nfile.trimmed &lt;- file %&gt;% na.omit()\n\n\nfile.trimmed  %&gt;% datatable(class = c(\"compact\",\"cell-border\"), callback = JS('table.page(3).draw(false);'))"
+  },
+  {
+    "objectID": "posts/august-assignment-1/index.html",
+    "href": "posts/august-assignment-1/index.html",
+    "title": "Asignación # 1 – Data Engineering – Limpieza de Datos",
+    "section": "",
+    "text": "Fecha de entrega: miércoles 10 de agosto-2023\nBuscar en R, funciones que de librerias que ya permiten arreglar los datos:\nTrabajo en equipo, la entrega es individual\nStringr y otras – investigar – compartir conocimientos entre todos"
+  },
+  {
+    "objectID": "posts/august-assignment-1/index.html#librerias",
+    "href": "posts/august-assignment-1/index.html#librerias",
+    "title": "Asignación # 1 – Data Engineering – Limpieza de Datos",
+    "section": "Librerias",
+    "text": "Librerias\n\nlibrary(stringr)\nlibrary(readxl)\nlibrary(DT)"
+  },
+  {
+    "objectID": "posts/august-assignment-1/index.html#lectura-del-archivo-excel",
+    "href": "posts/august-assignment-1/index.html#lectura-del-archivo-excel",
+    "title": "Asignación # 1 – Data Engineering – Limpieza de Datos",
+    "section": "Lectura del archivo excel",
+    "text": "Lectura del archivo excel\n\nfile &lt;- read_excel(\"./datos_energia-taller-con-datos-fotovoltaicas.xlsx\")"
+  },
+  {
+    "objectID": "posts/august-assignment-1/index.html#archivo-original",
+    "href": "posts/august-assignment-1/index.html#archivo-original",
+    "title": "Asignación # 1 – Data Engineering – Limpieza de Datos",
+    "section": "Archivo Original",
+    "text": "Archivo Original\n\nfile %&gt;% datatable(class = c(\"compact\",\"cell-border\"), callback = JS('table.page(3).draw(false);'))"
+  },
+  {
+    "objectID": "posts/august-assignment-1/index.html#eliminando-las-celdas-vacias",
+    "href": "posts/august-assignment-1/index.html#eliminando-las-celdas-vacias",
+    "title": "Asignación # 1 – Data Engineering – Limpieza de Datos",
+    "section": "Eliminando las celdas vacias",
+    "text": "Eliminando las celdas vacias\n\nfile.trimmed &lt;- file %&gt;% na.omit()\n\n\nfile.trimmed  %&gt;% datatable(class = c(\"compact\",\"cell-border\"), callback = JS('table.page(3).draw(false);'))"
   }
 ]
