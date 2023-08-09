@@ -1,6 +1,12 @@
 ---
 title: "Gráfica de barra con ggplot2"
 date: "2023-08-01"
+categories:
+  - ggplot2
+  - ggplot
+  - dplyr
+  - barchart
+  - iris
 ---
 
 Gráfica de barras con los valores correspondientes en cada barra utilizando el dataset iris en ggplot2 en R, se puede seguir los siguientes pasos:
