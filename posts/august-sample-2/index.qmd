@@ -1,0 +1,33 @@
+---
+title: "Utilizando `describe()` en IRIS"
+date: "2023-08-02"
+categories:
+  - psych
+  - DT
+  - iris
+  - datatable
+---
+
+```{r,message=FALSE}
+# Cargar la librería psych
+library(psych)
+
+# Cargar la librería datable
+library(DT)
+```
+
+Utilizamos la función **`describe()`** de la librería psych en R con los datos del dataset iris:
+```{r}
+# Utilizar el dataset iris
+data(iris)
+
+# Obtener estadísticas descriptivas utilizando describe()
+results <- describe(iris)
+
+# Imprimir los resultados
+results %>% datatable()
+```
+Se utiliza la función **`data()`** para cargar el dataset iris. A continuación, se utiliza la función describe() para obtener estadísticas descriptivas del dataset iris. Los resultados se almacenan en un data frame llamado **`results`**.
+
+La función **`describe()`** de la librería **`psych`** proporciona un conjunto de estadísticas descriptivas, como la media, la mediana, la desviación estándar, los valores mínimo y máximo, entre otros, para cada variable del dataset iris.
+Es importante tener en cuenta que la función **`describe()`** es muy útil para obtener estadísticas descriptivas de un conjunto de datos, lo que puede ayudar a comprender mejor las características y distribución de los datos.
