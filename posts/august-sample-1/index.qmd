@@ -1,0 +1,42 @@
+---
+title: "Gráfica de barra con ggplot2"
+date: "2023-08-01"
+---
+
+Gráfica de barras con los valores correspondientes en cada barra utilizando el dataset iris en ggplot2 en R, se puede seguir los siguientes pasos:
+
+1.  Cargar la librería ggplot2 , dplyr y el dataset iris:
+
+```{r, message=FALSE}
+library(ggplot2)
+library(dplyr)
+```
+
+```{r}
+data(iris)
+```
+
+2.  Seleccionar las variables a utilizar y crear un dataframe con los valores correspondientes:
+
+```{r}
+df <- iris %>% 
+  group_by(Species) %>% 
+  summarise(Media = mean(Sepal.Length)) %>% 
+  top_n(5)
+```
+
+En este caso, se selecciona la variable Species y se calcula la media de la variable Sepal.Length para cada especie. Luego, se seleccionan las 5 especies con mayor media.
+
+3.  Crear la gráfica de barras utilizando la función **`geom_bar()`** y agregar las etiquetas de texto utilizando la función **`geom_text()`**:
+
+```{r}
+ggplot(df, aes(x = Species, y = Media, fill = Species)) + 
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = round(Media, 2)), vjust = -0.5) +
+  ggtitle("Media de Sepal.Length por especie") +
+  xlab("Especie") +
+  ylab("Media de Sepal.Length") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+En este caso, se utiliza la función **`ggplot()`** para crear la gráfica de barras y se especifica el dataframe **`df`** y las variables Species y Media como los ejes **`x`** e **`y`**, respectivamente. La función **`geom_bar()`** se utiliza para crear las barras y la función **`geom_text()`** se utiliza para agregar las etiquetas de texto con los valores correspondientes. Además, se agrega un título y etiquetas para los ejes **`x`** e **`y`** utilizando las funciones **`ggtitle()`**, **`xlab()`** e **`ylab()`**. Por último, se utiliza la función **`theme()`** para centrar el título de la gráfica.
