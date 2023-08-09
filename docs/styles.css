@@ -1,1 +1,16 @@
 /* css styles */
+.list.quarto-listing-default div:last-of-type {
+    & .listing-date{
+   border: 1px solid #dee2e6;
+}
+}
+.listing-date{
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 10px;
+  color: #a164bf;
+  background-color: #f8f8f8;
+  font-weight: bold;
+  font-size: 1.5em;
+}
