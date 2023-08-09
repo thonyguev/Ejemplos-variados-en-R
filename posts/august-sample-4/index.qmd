@@ -1,0 +1,50 @@
+---
+title: "Distribución de Gaus (normal) de la longitud de los sépalos por especie"
+date: "2023-08-04"
+categories:
+  - iris
+  - gaus
+  - "desviación normal"
+  - ggplot2
+  - ggplot
+---
+
+```{r, message=FALSE}
+library(ggplot2)
+```
+
+
+Para realizar la desviación normal del dataset iris en R y mostrar el resultado en una gráfica de campana de Gauss utilizando los datos del tamaño del sépalo y la especie, se puede seguir los siguientes pasos:
+
+1.  Cargar el dataset iris y seleccionar las variables de interés:
+
+```{r}
+# Cargar el dataset iris
+data(iris)
+
+# Seleccionar las variables de interés
+iris_sepal <- iris[, c("Sepal.Length", "Species")]
+```
+
+En este ejemplo, se carga el dataset iris utilizando la función **`data()`**. Luego, se seleccionan las variables de interés utilizando la sintaxis **`iris[, c("Sepal.Length", "Species")]`**. En este caso, se selecciona la variable **`Sepal.Length`** que corresponde al tamaño del sépalo y la variable **`Species`** que corresponde a la especie de la flor.
+
+2.  Realizar la desviación normal de la variable Sepal.Length utilizando la función **`scale()`**:
+
+```{r}
+# Realizar la desviación normal de la variable Sepal.Length
+iris_sepal$Sepal.Length <- scale(iris_sepal$Sepal.Length)
+
+```
+
+En este paso, se utiliza la función **`scale()`** para realizar la desviación normal de la variable **`Sepal.Length`**.
+
+3.  Crear la gráfica de campana de Gauss utilizando la función **`ggplot2`**:
+
+```{r}
+# Crear la gráfica de campana de Gauss
+ggplot(iris_sepal, aes(x = Sepal.Length, fill = Species)) +
+  geom_density(alpha = 0.5) +
+  ggtitle("Gráfica de campana de Gauss para el tamaño del sépalo por especie")
+```
+
+En este paso, se utiliza la función **`ggplot()`** para crear la gráfica de campana de Gauss. Se utiliza **`geom_density()`** para agregar la curva de densidad y se especifica **`fill = Species`** para separar las curvas de densidad por especie. La función **`ggtitle()`** se utiliza para agregar un título a la gráfica.Al ejecutar este código, se mostrará la gráfica de campana de Gauss para el tamaño del sépalo por especie después de realizar la desviación normal.
