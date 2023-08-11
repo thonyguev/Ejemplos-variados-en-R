@@ -200,7 +200,7 @@
     "href": "posts/august-assignment-1/index.html#librerias",
     "title": "Asignación # 1 – Data Engineering – Limpieza de Datos",
     "section": "Librerias",
-    "text": "Librerias\n\nlibrary(stringr)\nlibrary(readxl)\nlibrary(DT)\nlibrary(ggplot2)"
+    "text": "Librerias\n\nlibrary(stringr)\nlibrary(readxl)\nlibrary(DT)\nlibrary(ggplot2)\nlibrary(psych)\nlibrary(R.utils)\nlibrary(dplyr)"
   },
   {
     "objectID": "posts/august-assignment-1/index.html#lectura-del-archivo-excel",

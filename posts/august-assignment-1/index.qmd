@@ -44,6 +44,9 @@ library(stringr)
 library(readxl)
 library(DT)
 library(ggplot2)
+library(psych)
+library(R.utils)
+library(dplyr)
 ```
 
 ## Lectura del archivo excel
@@ -87,7 +90,7 @@ file.trimmed %>% datatable(class = c("compact","cell-border"), callback = JS('ta
 ```
 </details>
 
-<details open>
+<details>
 <summary>**Cantidad Variables Categoricas en la Columna `TIPO`**</summary>
 ```{r}
 quantity.column.tipo <- file.trimmed$TIPO %>% table() %>% data.frame()
@@ -107,13 +110,56 @@ ggplot(
     label = frequency
   ),vjust = -0.5)
 ```
-```{r, message=FALSE}
-library(psych)
+
+</details>
+
+<details>
+<summary>**Columnas con variables númericas**</summary>
+
+**Dataframe filtro con las columnas númericas**
+```{r}
+columns.numerics <- file.trimmed %>% select_if(is.numeric) %>% data.frame()
+```
+
+**Mostrar columnas con variables númericas**
+```{r}
+columns.numerics %>% 
+  colnames() %>% 
+  paste(.,collapse = "\n") %>% 
+  cat()
+```
+</details>
+
+<details>
+<summary>**Identificando valores ceros**</summary>
+
+```{r}
+# Identificar los valores ceros
+ceros <- which(file.trimmed == 0, arr.ind = TRUE)
+print(ceros)
+```
+</details>
+
+<details>
+<summary>**Nombre de columnas en minusculas**</summary>
+```{r}
+# Aplicar tolower() a los nombres de las columnas
+colnames(file.trimmed) <- sapply(colnames(file.trimmed), tolower)
 ```
 
 ```{r}
-file.trimmed %>% describe() %>% datatable()
+file.trimmed %>% datatable()
+```
+```{r}
+# Aplicar tolower() a los valores de las columnas
+file.trimmed <- file.trimmed %>% mutate_all(tolower)
 ```
 
+```{r}
+file.trimmed %>% datatable()
+```
+
+
 </details>
+
 </details>
