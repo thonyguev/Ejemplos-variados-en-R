@@ -1,0 +1,41 @@
+---
+title: "Asignacion # 2 - Agosto: Manipulación de Datadaframes y cálculos"
+date: "2023-08-11"
+---
+
+```{r, message=FALSE}
+library(readxl)
+library(DT)
+library(tibble)
+```
+
+```{r}
+file <- read_xlsx(path = "./data1.xlsx")
+file.values <- read_xlsx(path = "./data2.xlsx")
+```
+
+```{r}
+file %>% datatable()
+```
+
+```{r}
+file.values %>% datatable()
+```
+
+```{r}
+`Columna A, Fila 1` <- rep(file.values[1,2],nrow(file))
+`Columna A, Fila 2` <- rep(file.values[2,2],nrow(file))
+`Columna A, Fila 3` <- rep(file.values[3,2],nrow(file))
+```
+
+```{r}
+df <- file %>% 
+  add_column(., `Columna A, Fila 1`,.after = "instalada") %>%
+  add_column(., `Columna A, Fila 2`,.after = "generacion") %>%
+  add_column(., `Columna A, Fila 3`,.after = "firme")
+```
+
+```{r}
+df %>% datatable
+```
+
