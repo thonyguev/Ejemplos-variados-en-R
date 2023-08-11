@@ -256,6 +256,20 @@
     "href": "posts/august-assignment-2/index.html",
     "title": "Asignacion # 2 - Agosto: Manipulación de Datadaframes y cálculos",
     "section": "",
-    "text": "library(readxl)\nlibrary(DT)\nlibrary(tibble)\n\n\nfile &lt;- read_xlsx(path = \"./data1.xlsx\")\nfile.values &lt;- read_xlsx(path = \"./data2.xlsx\")\n\n\nfile %&gt;% datatable()\n\n\n\n\n\n\n\nfile.values %&gt;% datatable()\n\n\n\n\n\n\n\n`Columna A, Fila 1` &lt;- rep(file.values[1,2],nrow(file))\n`Columna A, Fila 2` &lt;- rep(file.values[2,2],nrow(file))\n`Columna A, Fila 3` &lt;- rep(file.values[3,2],nrow(file))\n\n\ndf &lt;- file %&gt;% \n  add_column(., `Columna A, Fila 1`,.after = \"instalada\") %&gt;%\n  add_column(., `Columna A, Fila 2`,.after = \"generacion\") %&gt;%\n  add_column(., `Columna A, Fila 3`,.after = \"firme\")\n\n\ndf %&gt;% datatable"
+    "text": "library(readxl)\nlibrary(DT)\nlibrary(tibble)\nlibrary(purrr)\nfile &lt;- read_xlsx(path = \"./data1.xlsx\")\nfile.values &lt;- read_xlsx(path = \"./data2.xlsx\")\nfile %&gt;% datatable()\nfile.values %&gt;% datatable()\n`Columna A, Fila 1` &lt;- rep(file.values[1,2] %&gt;% as.numeric ,nrow(file))\n`Columna A, Fila 2` &lt;- rep(file.values[2,2] %&gt;% as.numeric ,nrow(file))\n`Columna A, Fila 3` &lt;- rep(file.values[3,2] %&gt;% as.numeric ,nrow(file))\ndf &lt;- file %&gt;% \n  add_column(., `Columna A, Fila 1`,.after = \"instalada\") %&gt;%\n  add_column(., `Columna A, Fila 2`,.after = \"generacion\") %&gt;%\n  add_column(., `Columna A, Fila 3`,.after = \"firme\")\ndf %&gt;% datatable\n`result preview` &lt;- (df[1,2] * df[1,3]) + (df[1,4] * df[1,5]) + (df[1,6] * df[1,7])\n`result preview`\n\n  instalada\n1   4754.26\noperation &lt;- map(1:nrow(df), function(x){\n  math.operation &lt;- (df[x,2] * df[x,3]) + (df[x,4] * df[x,5]) + (df[x,6] * df[x,7])\n  math.round &lt;- round(math.operation,2)\n  return(math.round)\n})\nresult &lt;- operation %&gt;% do.call(rbind,.) %&gt;% data.frame()\ncolnames(result) &lt;- \"Resultado\"\nresult %&gt;% datatable()\ndf.result &lt;- df %&gt;% \n  add_column(., result,.after = \"planta\")"
+  },
+  {
+    "objectID": "posts/august-assignment-2/index.html#resultado-final",
+    "href": "posts/august-assignment-2/index.html#resultado-final",
+    "title": "Asignacion # 2 - Agosto: Manipulación de Datadaframes y cálculos",
+    "section": "Resultado Final",
+    "text": "Resultado Final\n\ndf.result %&gt;% datatable()"
+  },
+  {
+    "objectID": "posts/august-assignment-2/index.html#resultado-final-1",
+    "href": "posts/august-assignment-2/index.html#resultado-final-1",
+    "title": "Asignacion # 2 - Agosto: Manipulación de Datadaframes y cálculos",
+    "section": "Resultado Final #1",
+    "text": "Resultado Final #1\n\ndf.result %&gt;% datatable()"
   }
 ]

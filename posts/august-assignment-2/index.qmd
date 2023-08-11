@@ -7,6 +7,7 @@ date: "2023-08-11"
 library(readxl)
 library(DT)
 library(tibble)
+library(purrr)
 ```
 
 ```{r}
@@ -23,9 +24,9 @@ file.values %>% datatable()
 ```
 
 ```{r}
-`Columna A, Fila 1` <- rep(file.values[1,2],nrow(file))
-`Columna A, Fila 2` <- rep(file.values[2,2],nrow(file))
-`Columna A, Fila 3` <- rep(file.values[3,2],nrow(file))
+`Columna A, Fila 1` <- rep(file.values[1,2] %>% as.numeric ,nrow(file))
+`Columna A, Fila 2` <- rep(file.values[2,2] %>% as.numeric ,nrow(file))
+`Columna A, Fila 3` <- rep(file.values[3,2] %>% as.numeric ,nrow(file))
 ```
 
 ```{r}
@@ -37,5 +38,40 @@ df <- file %>%
 
 ```{r}
 df %>% datatable
+```
+
+```{r}
+`result preview` <- (df[1,2] * df[1,3]) + (df[1,4] * df[1,5]) + (df[1,6] * df[1,7])
+```
+
+```{r}
+`result preview`
+```
+
+```{r}
+operation <- map(1:nrow(df), function(x){
+  math.operation <- (df[x,2] * df[x,3]) + (df[x,4] * df[x,5]) + (df[x,6] * df[x,7])
+  math.round <- round(math.operation,2)
+  return(math.round)
+})
+```
+
+```{r}
+result <- operation %>% do.call(rbind,.) %>% data.frame()
+colnames(result) <- "Resultado"
+```
+
+```{r}
+result %>% datatable()
+```
+
+```{r}
+df.result <- df %>% 
+  add_column(., result,.after = "planta")
+```
+
+## Resultado Final #1
+```{r}
+df.result %>% datatable()
 ```
 
