@@ -1,7 +1,10 @@
 ---
-title: "Asignacion # 2 - Agosto: Manipulación de Datadaframes y cálculos"
+title: "Asignacion # 2 - Agosto: Manipulación de dataframes y cálculos"
 date: "2023-08-11"
 ---
+
+<details>
+<summary>**Proceso**</summary>
 
 ```{r, message=FALSE}
 library(readxl)
@@ -69,6 +72,7 @@ result %>% datatable()
 df.result <- df %>% 
   add_column(., result,.after = "planta")
 ```
+</details>
 
 ## Resultado Final #1
 ```{r}

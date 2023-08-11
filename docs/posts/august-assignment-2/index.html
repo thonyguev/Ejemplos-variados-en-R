@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2023-08-11">
 
-<title>Ejemplos variados en R - Asignacion # 2 - Agosto: Manipulación de Datadaframes y cálculos</title>
+<title>Ejemplos variados en R - Asignacion # 2 - Agosto: Manipulación de dataframes y cálculos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -146,7 +146,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Asignacion # 2 - Agosto: Manipulación de Datadaframes y cálculos</h1>
+      <h1 class="title">Asignacion # 2 - Agosto: Manipulación de dataframes y cálculos</h1>
                       </div>
   </div>
     
@@ -175,6 +175,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+<details>
+<summary>
+<strong>Proceso</strong>
+</summary>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
@@ -189,16 +193,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>file <span class="sc">%&gt;%</span> <span class="fu">datatable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-de34d4ab0f32d5f3efec" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-de34d4ab0f32d5f3efec">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],["AES Panama","AES GAS","ENEL  FORTUNA"],[481.96,381,300],[1523.05,1376,1383.17],[306.55,349.89,289.49]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>planta<\/th>\n      <th>instalada<\/th>\n      <th>generacion<\/th>\n      <th>firme<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-68eb94013ab4935c660b" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-68eb94013ab4935c660b">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],["AES Panama","AES GAS","ENEL  FORTUNA"],[481.96,381,300],[1523.05,1376,1383.17],[306.55,349.89,289.49]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>planta<\/th>\n      <th>instalada<\/th>\n      <th>generacion<\/th>\n      <th>firme<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>file.values <span class="sc">%&gt;%</span> <span class="fu">datatable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-9711659b564376003154" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-9711659b564376003154">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],["instalada","generacion","firme"],[1,2,4],[15,20,50]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>tipo_energia<\/th>\n      <th>A<\/th>\n      <th>B<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-7c85e3a76da8983bc6ed" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-7c85e3a76da8983bc6ed">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],["instalada","generacion","firme"],[1,2,4],[15,20,50]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>tipo_energia<\/th>\n      <th>A<\/th>\n      <th>B<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="cell">
@@ -216,8 +220,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> datatable</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-99af950271838395bfd4" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-99af950271838395bfd4">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],["AES Panama","AES GAS","ENEL  FORTUNA"],[481.96,381,300],[1,1,1],[1523.05,1376,1383.17],[2,2,2],[306.55,349.89,289.49],[4,4,4]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>planta<\/th>\n      <th>instalada<\/th>\n      <th>Columna A, Fila 1<\/th>\n      <th>generacion<\/th>\n      <th>Columna A, Fila 2<\/th>\n      <th>firme<\/th>\n      <th>Columna A, Fila 3<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6,7]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-4c6634abc48c0ec2c0c8" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-4c6634abc48c0ec2c0c8">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],["AES Panama","AES GAS","ENEL  FORTUNA"],[481.96,381,300],[1,1,1],[1523.05,1376,1383.17],[2,2,2],[306.55,349.89,289.49],[4,4,4]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>planta<\/th>\n      <th>instalada<\/th>\n      <th>Columna A, Fila 1<\/th>\n      <th>generacion<\/th>\n      <th>Columna A, Fila 2<\/th>\n      <th>firme<\/th>\n      <th>Columna A, Fila 3<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6,7]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="cell">
@@ -245,22 +249,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>result <span class="sc">%&gt;%</span> <span class="fu">datatable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-079604b0ce92671b9a54" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-079604b0ce92671b9a54">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],[4754.26,4532.56,4224.3]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Resultado<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-c689272b754abe5317a1" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-c689272b754abe5317a1">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],[4754.26,4532.56,4224.3]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Resultado<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df.result <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_column</span>(., result,<span class="at">.after =</span> <span class="st">"planta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</details>
 <section id="resultado-final-1" class="level2">
 <h2 class="anchored" data-anchor-id="resultado-final-1">Resultado Final #1</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df.result <span class="sc">%&gt;%</span> <span class="fu">datatable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-f6b85fc873878280a8a5" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-f6b85fc873878280a8a5">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],["AES Panama","AES GAS","ENEL  FORTUNA"],[4754.26,4532.56,4224.3],[481.96,381,300],[1,1,1],[1523.05,1376,1383.17],[2,2,2],[306.55,349.89,289.49],[4,4,4]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>planta<\/th>\n      <th>Resultado<\/th>\n      <th>instalada<\/th>\n      <th>Columna A, Fila 1<\/th>\n      <th>generacion<\/th>\n      <th>Columna A, Fila 2<\/th>\n      <th>firme<\/th>\n      <th>Columna A, Fila 3<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6,7,8]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-346c42716d864baef493" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-346c42716d864baef493">{"x":{"filter":"none","vertical":false,"data":[["1","2","3"],["AES Panama","AES GAS","ENEL  FORTUNA"],[4754.26,4532.56,4224.3],[481.96,381,300],[1,1,1],[1523.05,1376,1383.17],[2,2,2],[306.55,349.89,289.49],[4,4,4]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>planta<\/th>\n      <th>Resultado<\/th>\n      <th>instalada<\/th>\n      <th>Columna A, Fila 1<\/th>\n      <th>generacion<\/th>\n      <th>Columna A, Fila 2<\/th>\n      <th>firme<\/th>\n      <th>Columna A, Fila 3<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6,7,8]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 
